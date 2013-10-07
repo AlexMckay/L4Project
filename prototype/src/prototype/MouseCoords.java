@@ -1,8 +1,23 @@
 package prototype;
 
+import java.awt.*;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 
 public class MouseCoords extends java.applet.Applet implements java.awt.event.MouseListener  {
+	
+	Image cperks;
+	URL base;
+	MediaTracker tr;	
+	
+	public void paint(Graphics g) {
+	   tr = new MediaTracker(this);
+	   cperks = getImage(getCodeBase(), "colin.jpg");
+	   tr.addImage(cperks,0);
+	   g.drawImage(cperks, 0, 0, this);
+	} 
+	
 	
 	public MouseCoords() {
 		
