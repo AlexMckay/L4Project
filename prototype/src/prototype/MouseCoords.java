@@ -1,39 +1,51 @@
 package prototype;
 
 import java.awt.*;
-import java.awt.Image;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.net.URL;
+
+import javax.imageio.ImageIO;
 
 public class MouseCoords extends java.applet.Applet implements java.awt.event.MouseListener  {
 	
 	Image cperks;
+	int clickCount=0;
+	int height, width;
 	URL base;
-	MediaTracker tr;	
+	MediaTracker tr;
+	
+	public void init(){
+		setBackground(java.awt.Color.red);
+		setSize(500,500);
+	}
 	
 	public void paint(Graphics g) {
-	   tr = new MediaTracker(this);
-	   cperks = getImage(getCodeBase(), "colin.jpg");
-	   tr.addImage(cperks,0);
-	   g.drawImage(cperks, 0, 0, this);
+		cperks = getImage(getCodeBase(), "colin.jpg");
+		height = cperks.getHeight(null);
+		width = cperks.getWidth(null);
+		tr = new MediaTracker(this);
+		tr.addImage(cperks,0);
+		g.drawImage(cperks, 0, 0, this);
 	} 
-	
 	
 	public MouseCoords() {
 		
-		addMouseListener(this) ; 
-		setBackground(java.awt.Color.red) ; 
+		addMouseListener(this); 
 		
 	} 
 
 	@Override
 	public void mouseClicked(MouseEvent ev) {
 		int x, y;
+		clickCount++;
 		
 		x = ev.getX();
 		y = ev.getY();
 		
-		System.out.printf("x = %d y = %d \n", x, y);
+		System.out.printf("%d. x = %d y = %d \n", clickCount, x, y);
+		
 		
 	}
 
