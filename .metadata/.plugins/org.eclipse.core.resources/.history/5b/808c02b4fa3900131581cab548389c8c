@@ -57,18 +57,26 @@ public class UserInterface extends Application {
 //        grid.add(tbox, 1, 1);
         
         Button btn = new Button("show last click position");
-        btn.setOnAction(btnShowCoordsListener);
         HBox hbBtn = new HBox(10);
         hbBtn.getChildren().add(btn);
         grid.add(hbBtn, 0, 0);
         
         Button btn2 = new Button("load image");
-        btn2.setOnAction(btnLoadImageListener);
         HBox hbBtn2 = new HBox(10);
         hbBtn2.getChildren().add(btn2);
-        grid.add(hbBtn2, 0, 1);
+        grid.add(hbBtn2, 1, 0);
     
-        grid.add(imageBox, 0, 2);
+        grid.add(imageBox, 0, 1);
+        
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+        	 
+            @Override
+            public void handle(ActionEvent e) {
+            	String s = String.format("x = %.0f y = %.0f \n", c.getX(), c.getY());
+            	scenetitle.setText(s);
+                c.printValues();
+            }
+        });
         
         grid.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
         	@Override
@@ -88,7 +96,7 @@ public class UserInterface extends Application {
         primaryStage.show();
     }
     
-    EventHandler<ActionEvent> btnLoadImageListener
+    EventHandler<ActionEvent> btnLoadEventListener
     = new EventHandler<ActionEvent>(){
  
         @Override
@@ -114,7 +122,7 @@ public class UserInterface extends Application {
         }
     };
     
-    EventHandler<ActionEvent> btnShowCoordsListener
+    EventHandler<ActionEvent> btnShowCoordsClicker
     = new EventHandler<ActionEvent>(){
  
     	@Override

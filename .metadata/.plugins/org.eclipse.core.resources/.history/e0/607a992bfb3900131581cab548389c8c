@@ -66,9 +66,9 @@ public class UserInterface extends Application {
         btn2.setOnAction(btnLoadImageListener);
         HBox hbBtn2 = new HBox(10);
         hbBtn2.getChildren().add(btn2);
-        grid.add(hbBtn2, 0, 1);
+        grid.add(hbBtn2, 1, 0);
     
-        grid.add(imageBox, 0, 2);
+        grid.add(imageBox, 0, 1);
         
         grid.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
         	@Override
