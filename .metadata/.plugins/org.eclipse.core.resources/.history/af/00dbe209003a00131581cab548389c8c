@@ -66,7 +66,7 @@ public class UserInterface extends Application {
     
         //grid.add(imageBox, 0, 0);     
 
-        Scene scene = new Scene(grid, 250, 30);
+        Scene scene = new Scene(grid, 300, 30);
         //Image image = new Image(".jpg");
         //scene.setCursor(new ImageCursor(image, image.getWidth() / 2, image.getHeight() /2));
         primaryStage.setScene(scene);

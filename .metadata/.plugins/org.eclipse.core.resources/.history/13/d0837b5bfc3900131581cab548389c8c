@@ -4,24 +4,28 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.imageio.ImageIO;
+
 import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
-import javax.imageio.ImageIO;
 
 public class UserInterface extends Application {
     public static void main(String[] args) {
@@ -38,10 +42,10 @@ public class UserInterface extends Application {
         primaryStage.setTitle("Co-ord clicker");
         
         GridPane grid = new GridPane();
-        grid.setAlignment(Pos.TOP_LEFT);
+        grid.setAlignment(Pos.TOP_CENTER);
         grid.setHgap(5);
         grid.setVgap(2);
-        grid.setPadding(new Insets(5, 5, 5, 5));
+        grid.setPadding(new Insets(25, 25, 25, 25));
         
         //grid.setGridLinesVisible(true); 
         
@@ -62,17 +66,25 @@ public class UserInterface extends Application {
         btn2.setOnAction(btnLoadImageListener);
         HBox hbBtn2 = new HBox(10);
         hbBtn2.getChildren().add(btn2);
-        grid.add(hbBtn2, 1, 0);
+        grid.add(hbBtn2, 0, 1);
     
-        //grid.add(imageBox, 0, 0);     
+        grid.add(imageBox, 0, 2);
+        
+        grid.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        	@Override
+        	public void handle(MouseEvent me) {
+            	c.setX(me.getSceneX());
+            	c.setY(me.getSceneY());  
+        	}
+        });
+     
 
-        Scene scene = new Scene(grid, 250, 30);
+        Scene scene = new Scene(grid, 500, 404);
         //Image image = new Image(".jpg");
         //scene.setCursor(new ImageCursor(image, image.getWidth() / 2, image.getHeight() /2));
         primaryStage.setScene(scene);
-        primaryStage.setX(50);
-        primaryStage.setY(50);
         scene.getStylesheets().add("style.css");
+       // scene.getStylesheets().add(HelloWorld.class.getResource("style.css").toExternalForm());
         primaryStage.show();
     }
     
@@ -94,30 +106,6 @@ public class UserInterface extends Application {
             try {
                 BufferedImage bufferedImage = ImageIO.read(file);
                 Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-
-                StackPane secondaryLayout = new StackPane();
-                secondaryLayout.getChildren().add(imageBox);
-                
-                secondaryLayout.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-                	@Override
-                	public void handle(MouseEvent me) {
-                    	c.setX(me.getSceneX());
-                    	c.setY(me.getSceneY());  
-                	}
-                });
-                
-                Scene secondScene = new Scene(secondaryLayout, bufferedImage.getWidth(), bufferedImage.getHeight());
-
-                Stage secondStage = new Stage();
-                secondStage.setTitle("Image View");
-                secondStage.setScene(secondScene);
-                 
-                //Set position of second window, related to primary window.
-                //secondStage.setX(primaryStage.getX() + 250);
-                //secondStage.setY(primaryStage.getY() + 100);
-
-                secondStage.show();
-                
                 imageBox.setImage(image);
             } catch (IOException ex) {
                 Logger.getLogger(UserInterface.class.getName()).log(Level.SEVERE, null, ex);

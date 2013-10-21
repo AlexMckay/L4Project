@@ -38,7 +38,7 @@ public class UserInterface extends Application {
         primaryStage.setTitle("Co-ord clicker");
         
         GridPane grid = new GridPane();
-        grid.setAlignment(Pos.TOP_LEFT);
+        grid.setAlignment(Pos.TOP_CENTER);
         grid.setHgap(5);
         grid.setVgap(2);
         grid.setPadding(new Insets(5, 5, 5, 5));
@@ -66,13 +66,12 @@ public class UserInterface extends Application {
     
         //grid.add(imageBox, 0, 0);     
 
-        Scene scene = new Scene(grid, 250, 30);
+        Scene scene = new Scene(grid, 300, 30);
         //Image image = new Image(".jpg");
         //scene.setCursor(new ImageCursor(image, image.getWidth() / 2, image.getHeight() /2));
         primaryStage.setScene(scene);
-        primaryStage.setX(50);
-        primaryStage.setY(50);
         scene.getStylesheets().add("style.css");
+       // scene.getStylesheets().add(HelloWorld.class.getResource("style.css").toExternalForm());
         primaryStage.show();
     }
     
@@ -109,7 +108,7 @@ public class UserInterface extends Application {
                 Scene secondScene = new Scene(secondaryLayout, bufferedImage.getWidth(), bufferedImage.getHeight());
 
                 Stage secondStage = new Stage();
-                secondStage.setTitle("Image View");
+                secondStage.setTitle("Second Stage");
                 secondStage.setScene(secondScene);
                  
                 //Set position of second window, related to primary window.
