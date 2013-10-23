@@ -49,8 +49,7 @@ public class Controller {
             Stage secondStage = new Stage();
             secondStage.setTitle("Image View");
             secondStage.setScene(secondScene);
-            
-            
+             
             //Set position of second window, related to primary window.
             //secondStage.setX(primaryStage.getX() + 0);
             //secondStage.setY(primaryStage.getY() + 0);
@@ -59,7 +58,7 @@ public class Controller {
             
             imageBox.setImage(image);
         } catch (IOException ex) {
-            Logger.getLogger(MainStage.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FXMLInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
             
             

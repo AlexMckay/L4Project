@@ -27,6 +27,7 @@ public class UserInterface extends Application {
 	
     int clickCount=0;
     SalientPoint c = new SalientPoint("lol","l");
+    ImageView imageBox = new ImageView();
     
     
     public static void main(String[] args) {

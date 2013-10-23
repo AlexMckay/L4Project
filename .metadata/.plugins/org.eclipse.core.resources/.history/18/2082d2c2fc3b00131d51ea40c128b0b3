@@ -14,13 +14,13 @@
  <!--   <gridLinesVisible>true</gridLinesVisible> -->
         
     <HBox spacing="2" alignment="top_center" 
-        GridPane.columnIndex="1" GridPane.rowIndex="0">
+        GridPane.columnIndex="0" GridPane.rowIndex="0">
         <Button text="Load Image"     
         onAction="#handleLoadButtonAction"/>
     </HBox>
 
     <Text fx:id="loadedmessage"
-        GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        GridPane.columnIndex="0" GridPane.rowIndex="1"/>
         
     <stylesheets>
       <URL value="@style.css"/>

@@ -2,3 +2,5 @@
 1382490762713	Move compilation unit
 1382490765376	Move file
 1382491797732	Rename package 'hello'
+1382539735347	Rename type 'FXMLInterface'
+1382540059951	Rename type 'ControlStage'
