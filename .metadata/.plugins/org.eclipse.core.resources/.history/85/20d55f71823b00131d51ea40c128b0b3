@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+<GridPane fx:controller="hello.Controller" 
+	xmlns:fx="http://dcs.gla.ac.uk" alignment="center" hgap="10" vgap="10">
+    <padding><Insets top="5" right="5" bottom="5" left="5"/></padding>
+        
+    <HBox spacing="10" alignment="bottom_right" 
+        GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <Button text="Load Image"     
+        onAction="#handleLoadButtonAction"/>
+    </HBox>
+
+    <Text fx:id="loadtext"
+        GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+        
+    <stylesheets>
+      <URL value="@style.css" />
+    </stylesheets>
+
+</GridPane>

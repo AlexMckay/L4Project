@@ -24,14 +24,15 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
 public class UserInterface extends Application {
+	
+    int clickCount=0;
+    SalientPoint c = new SalientPoint("lol","l");
+    ImageView imageBox = new ImageView();
+    
+    
     public static void main(String[] args) {
         launch(args);
     }
-    
-    int clickCount=0;
-    Coord c = new Coord();
-    ImageView imageBox = new ImageView();
-    
     
     @Override
     public void start(Stage primaryStage) {

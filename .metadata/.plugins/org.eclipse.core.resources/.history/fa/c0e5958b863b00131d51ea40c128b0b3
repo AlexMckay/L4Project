@@ -1,0 +1,14 @@
+package faceclicker;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.text.Text;
+ 
+public class Controller {
+    @FXML private Text loadedmessage;
+    
+    @FXML protected void handleLoadButtonAction(ActionEvent event) {
+        loadedmessage.setText("Image Loaded");
+    }
+
+}
