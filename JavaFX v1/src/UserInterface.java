@@ -82,6 +82,7 @@ public class UserInterface extends Application {
         @Override
         public void handle(ActionEvent t) {
             FileChooser fileChooser = new FileChooser();
+            ImageView imageBox = new ImageView();
              
             //Set extension filter
             FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
