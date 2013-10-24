@@ -2,8 +2,8 @@ package faceclicker;
 
 public class SalientPoint {
 
-	private double x, y;
-	private String name;
+	double x, y;
+	String name;
 	
 	public SalientPoint(String name){
 		x=0;
@@ -29,6 +29,10 @@ public class SalientPoint {
 	
 	public String getName(){
 		return name;
+	}
+	
+	public String getID(){
+		return id;
 	}
 	
 	public void printValues(){

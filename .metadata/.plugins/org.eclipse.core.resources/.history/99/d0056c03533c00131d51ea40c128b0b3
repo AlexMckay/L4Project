@@ -21,7 +21,8 @@ public class MainStage extends Application {
         
         primaryStage.setTitle("trollop");
         primaryStage.setScene(new Scene(root, 600, 600));
-        primaryStage.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {      	
+        primaryStage.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        	
         	@Override
         	public void handle(MouseEvent me) {
         		if (c.hasNext()){

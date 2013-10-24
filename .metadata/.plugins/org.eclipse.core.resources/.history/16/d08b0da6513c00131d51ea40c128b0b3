@@ -12,28 +12,20 @@ public class SalientPointCollection {
 	
 	public SalientPointCollection(){
 		spArray  = new ArrayList<SalientPoint>();
-		currentPoint = 0;
+		currentPoint = -1;
 		
 		for(String name : spNames){
 			spArray.add(new SalientPoint(name));
 		}
 	}
 	
-	public SalientPoint getCurrent(){
-		if(currentPoint<spArray.size()){
+	public SalientPoint getNext(){
+		currentPoint++;
+		if(currentPoint<=spArray.size()){
+			System.out.println(spArray.size());
 			System.out.println(spArray.get(currentPoint).getName());
 			return spArray.get(currentPoint);
 		}else{return null;}
-	}
-	
-	public boolean hasNext(){
-		if(currentPoint==spArray.size()){
-			return false;
-		}else{return true;}
-	}
-	
-	public void iterate(){
-		currentPoint++;
 	}
 
 }

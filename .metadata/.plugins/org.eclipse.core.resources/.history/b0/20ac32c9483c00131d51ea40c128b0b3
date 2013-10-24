@@ -19,7 +19,7 @@
         GridPane.columnIndex="0" GridPane.rowIndex="0">
         <Button text="Load Image"     
         	onAction="#handleLoadButtonAction"/>
-        <Text fx:id="nextclickmessage"/>
+        <Text fx:id="loadedmessage"/>
     </HBox>
         
     <ImageView fx:id="imagebox"

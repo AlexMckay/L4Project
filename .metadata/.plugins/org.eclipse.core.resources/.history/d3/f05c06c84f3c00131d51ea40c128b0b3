@@ -1,0 +1,21 @@
+package faceclicker;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class SalientPointCollection {
+	
+	List<SalientPoint> spArray;
+	String[] spNames = {"eyes", "nose", "mouth"};
+	
+	public SalientPointCollection(){
+		spArray  = new ArrayList<SalientPoint>();
+		
+		for(String name : spNames){
+			SalientPoint temp = new SalientPoint(name);
+			
+		}
+	}
+
+}

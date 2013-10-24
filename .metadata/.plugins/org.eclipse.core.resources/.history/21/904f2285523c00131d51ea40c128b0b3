@@ -12,7 +12,7 @@ public class SalientPointCollection {
 	
 	public SalientPointCollection(){
 		spArray  = new ArrayList<SalientPoint>();
-		currentPoint = 0;
+		currentPoint = -1;
 		
 		for(String name : spNames){
 			spArray.add(new SalientPoint(name));

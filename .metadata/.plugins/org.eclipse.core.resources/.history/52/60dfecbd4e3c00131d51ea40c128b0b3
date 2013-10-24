@@ -1,0 +1,11 @@
+package faceclicker;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class SalientPointCollection {
+	
+	List<SalientPoint> list = new ArrayList<SalientPoint>();
+
+}
