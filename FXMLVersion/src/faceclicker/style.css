@@ -15,11 +15,10 @@
    -fx-font-family: "Arial Black";
    -fx-fill: #000000;
 }
-#actiontarget {
-  -fx-font-size: 12px;
+#nextclickmessage {
+  -fx-font-size: 14px;
   -fx-text-fill: #000000;
   -fx-font-weight: bold;
-  -text-align: right;
 }
 
 .button {
@@ -28,6 +27,7 @@
     -fx-font-weight: bold;
     /*-fx-background-color: linear-gradient(#61a2b1, #2A5058);*/
     -fx-background-color: black;
+    border: 1px solid;
 }
 
 .button:hover {

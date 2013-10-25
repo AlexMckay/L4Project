@@ -6,8 +6,10 @@ import java.util.List;
 
 public class SalientPointCollection {
 	
+	
+	String[] spNames = {"left eye", "right eye", "left nostril", "right nostril", "mouth (left corner)", "mouth (right corner)", "mouth (upper lip)", "mouth (lower lip)", "chin", "left ear", "right ear"};
+	
 	List<SalientPoint> spArray;
-	String[] spNames = {"eyes", "nose", "mouth"};
 	int currentPoint;
 	
 	public SalientPointCollection(){
@@ -21,7 +23,6 @@ public class SalientPointCollection {
 	
 	public SalientPoint getCurrent(){
 		if(currentPoint<spArray.size()){
-			System.out.println(spArray.get(currentPoint).getName());
 			return spArray.get(currentPoint);
 		}else{return null;}
 	}

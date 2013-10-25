@@ -3,24 +3,26 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="231" key="DIALOG_WIDTH"/>
 		<item value="185" key="DIALOG_Y_ORIGIN"/>
-		<item value="841" key="DIALOG_X_ORIGIN"/>
 		<item value="356" key="DIALOG_HEIGHT"/>
+		<item value="841" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Corbel|8.25|0|WINDOWS|1|-11|0|0|0|400|0|0|0|1|0|0|0|0|Corbel" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="casesensitive"/>
 		<item value="false" key="isRegEx"/>
+		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="control" key="selection"/>
+		<item value="getSce" key="selection"/>
 		<list key="findhistory">
+			<item value="getsce"/>
+			<item value="FXML"/>
+			<item value="fxmli"/>
+			<item value="setx"/>
+			<item value="setc"/>
+			<item value="text fx"/>
+			<item value="css"/>
 			<item value="control"/>
-			<item value="primaryStage"/>
-			<item value="imageBox"/>
-			<item value="c"/>
-			<item value="btnLoadEventListener"/>
-			<item value="clicker"/>
 		</list>
 		<list key="replacehistory">
 			<item value="btnLoadImageListener"/>
