@@ -22,7 +22,6 @@ public class MainController {
     @FXML private Text nextclickmessage;
     @FXML private ImageView imagebox;
     SalientPointCollection points;
-    //activated is to check an image has been loaded
     boolean activated = false;
     
     //function to load new images when the button is pressed
@@ -69,13 +68,9 @@ public class MainController {
 	        	//displays the name of the next point to click
 	        	nextclickmessage.setText(points.getCurrent().getName());
 	    	}else{
-	    		SalientPoint sp = points.getCurrent();
-	    		sp.setX(me.getX());
-	        	sp.setY(me.getY());
 	    		nextclickmessage.setText("done!");
 	    		System.out.println("\n\nall points clicked! values:");
 	    		points.printPoints();
-	    		activated = false;
 	    	}
     	}
     }

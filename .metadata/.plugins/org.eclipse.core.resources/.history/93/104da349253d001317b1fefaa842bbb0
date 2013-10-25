@@ -69,13 +69,11 @@ public class MainController {
 	        	//displays the name of the next point to click
 	        	nextclickmessage.setText(points.getCurrent().getName());
 	    	}else{
-	    		SalientPoint sp = points.getCurrent();
 	    		sp.setX(me.getX());
 	        	sp.setY(me.getY());
 	    		nextclickmessage.setText("done!");
 	    		System.out.println("\n\nall points clicked! values:");
 	    		points.printPoints();
-	    		activated = false;
 	    	}
     	}
     }

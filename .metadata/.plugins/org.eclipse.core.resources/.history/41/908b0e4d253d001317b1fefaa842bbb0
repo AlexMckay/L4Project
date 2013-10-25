@@ -75,7 +75,6 @@ public class MainController {
 	    		nextclickmessage.setText("done!");
 	    		System.out.println("\n\nall points clicked! values:");
 	    		points.printPoints();
-	    		activated = false;
 	    	}
     	}
     }
