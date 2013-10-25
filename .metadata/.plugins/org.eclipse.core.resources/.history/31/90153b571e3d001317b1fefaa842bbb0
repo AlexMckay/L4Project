@@ -31,7 +31,6 @@ public class SalientPoint {
 		return name;
 	}
 	
-	//outputs the salient point's x and y values to std output
 	public void printValues(){
     	System.out.printf("%s: x = %.0f y = %.0f \n", name, x, y);
 	}

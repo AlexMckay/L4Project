@@ -42,7 +42,6 @@ public class SalientPointCollection {
 		currentPoint++;
 	}
 	
-	//outputs the complete list of x and y values for all the salient points to std output
 	public void printPoints(){
 		for (SalientPoint sp : spArray){
 			sp.printValues();

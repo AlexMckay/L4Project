@@ -23,26 +23,22 @@ public class SalientPointCollection {
 		}
 	}
 	
-	//returns the current salient point
 	public SalientPoint getCurrent(){
 		if(currentPoint<spArray.size()){
 			return spArray.get(currentPoint);
 		}else{return null;}
 	}
 	
-	//checks if the list has any more salient points after the current
 	public boolean hasNext(){
 		if(currentPoint==(spArray.size()-1)){
 			return false;
 		}else{return true;}
 	}
 	
-	//moves to the next salient point in the list
 	public void iterate(){
 		currentPoint++;
 	}
 	
-	//outputs the complete list of x and y values for all the salient points to std output
 	public void printPoints(){
 		for (SalientPoint sp : spArray){
 			sp.printValues();
