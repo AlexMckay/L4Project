@@ -11,8 +11,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class MainStage extends Application {
-	
-    MainController ct = new MainController();
     
     public static void main(String[] args) {
         Application.launch(MainStage.class, args);
@@ -30,13 +28,13 @@ public class MainStage extends Application {
         final MainController controller = (MainController) fxmlLoader.getController();
         
         primaryStage.setTitle("Face Clicker");
-        primaryStage.setScene(new Scene(root, 600, 600));
+        primaryStage.setScene(new Scene(root, 1028, 600));
         
         //listen for mouse clicks
         primaryStage.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {      	
         	@Override
         	public void handle(MouseEvent me) {
-                	controller.grabCoords(me);
+                	SalientPoint sp = controller.grabCoords(me);	
         	}
         });
         
