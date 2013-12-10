@@ -35,4 +35,8 @@ public class SalientPoint {
 	public void printValues(){
     	System.out.printf("%s: x = %.0f y = %.0f \n", name, x, y);
 	}
+        
+        public String toString(){
+            return String.format("%s: x = %.0f y = %.0f", name, x, y);
+        }
 }

@@ -1,21 +1,28 @@
 package faceclicker;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class SalientPointCollection {
-	
-	//values for the various salient points are set here
-	String[] spNames = {"left eye", "right eye", "left nostril", "right nostril", "mouth (left corner)", "mouth (right corner)", "mouth (upper lip)", "mouth (lower lip)", "chin", "left ear", "right ear"};
-	
-	List<SalientPoint> spArray;
-	//currentPoint is used to iterate through the list by storing the index value of the current salient point
-	int currentPoint;
+
+	ArrayList<String> spNames;	//values for the various salient points are set here from the config file
+	ArrayList<SalientPoint> spArray;	
+	int currentPoint; //used to iterate through the list by storing the index value of the current salient point
 	
 	public SalientPointCollection(){
-		spArray  = new ArrayList<SalientPoint>();
 		currentPoint = 0;
+		loadPoints();		
+		spArray = new ArrayList<SalientPoint>();
 		
 		//loops through the array of names and creates a salient point for each one
 		for(String name : spNames){
@@ -42,10 +49,42 @@ public class SalientPointCollection {
 		currentPoint++;
 	}
 	
-	//outputs the complete list of x and y values for all the salient points to std output
+	//outputs the list of x and y values for all the salient points to std output
 	public void printPoints(){
 		for (SalientPoint sp : spArray){
 			sp.printValues();
+		}
+	}
+        
+        //writes the list of x and y values for all the salient points to a file
+        public void writePoints(String s) throws FileNotFoundException, UnsupportedEncodingException{
+            String outputfile = s + ".txt";
+            PrintWriter writer = new PrintWriter(outputfile, "UTF-8");
+            
+            for (SalientPoint sp : spArray){
+                writer.println(sp.toString());
+            }
+            
+            writer.close();
+        }
+	
+	//load salient points from config file
+	public void loadPoints(){
+		spNames  = new ArrayList<String>();
+	
+		try{
+			  FileInputStream fstream = new FileInputStream("config-points.txt");
+			  DataInputStream in = new DataInputStream(fstream);
+			  BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			  String strLine;
+			  
+			  while ((strLine = br.readLine()) != null)   {
+				  spNames.add(strLine);
+			  }
+			  in.close();
+			  
+		}catch (Exception e){
+			  System.err.println("Error: " + e.getMessage());
 		}
 	}
 

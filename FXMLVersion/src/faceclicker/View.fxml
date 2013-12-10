@@ -21,6 +21,10 @@
         
         <Button text="Load Image"     
         	onAction="#handleLoadButtonAction"/>
+       	<Button text="Load Directory"     
+        	onAction="#handleLoadButtonAction2"/>
+        <Button text="Next Image"     
+        	onAction="#handleNextImage"/>
       	<Text fx:id="nextclickmessage"/>
       	
     </HBox>

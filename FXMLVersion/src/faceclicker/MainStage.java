@@ -28,7 +28,7 @@ public class MainStage extends Application {
         final MainController controller = (MainController) fxmlLoader.getController();
         
         primaryStage.setTitle("Face Clicker");
-        primaryStage.setScene(new Scene(root, 1028, 600));
+        primaryStage.setScene(new Scene(root, 500, 500));
         
         //listen for mouse clicks
         primaryStage.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {      	

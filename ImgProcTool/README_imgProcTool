@@ -1,0 +1,16 @@
+This helps to setup the project using Eclipse.
+This requires 2 IP libraries which are included in the zip.(jai_imageio.jar and clibwrapper_jiio.jar)
+If you are not using eclipse, please add these 2 libraries to your project.
+
+After opening Eclipse:
+
+1. Goto File->New->Java Project
+2. In the "contents" section, select the radio button "create project from existing source"
+3. Click browse to point to the downloaded ImgProcTool folder (Assuming u have unzipped the file)
+4. Click Finish on the "new Java Project" window.
+
+TEST IT BY EXECUTING THE PROJECT
+
+5. Right click on the project and select "Run as->java application"
+6. If everything is fine, there will be console output ending with "Done".
+7. Refresh the project, you will see a new .pgm file "lena_write.pgm".

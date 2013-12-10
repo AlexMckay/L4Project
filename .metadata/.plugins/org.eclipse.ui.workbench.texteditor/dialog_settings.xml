@@ -13,16 +13,16 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="getSce" key="selection"/>
+		<item value="Buffered" key="selection"/>
 		<list key="findhistory">
-			<item value="getsce"/>
-			<item value="FXML"/>
-			<item value="fxmli"/>
-			<item value="setx"/>
-			<item value="setc"/>
-			<item value="text fx"/>
-			<item value="css"/>
-			<item value="control"/>
+			<item value="buffered"/>
+			<item value="getby"/>
+			<item value="fileName"/>
+			<item value="points"/>
+			<item value="MouseEvent"/>
+			<item value="activated"/>
+			<item value="root"/>
+			<item value="fxml"/>
 		</list>
 		<list key="replacehistory">
 			<item value="btnLoadImageListener"/>
