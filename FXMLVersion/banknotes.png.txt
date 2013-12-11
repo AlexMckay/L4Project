@@ -1,11 +1,11 @@
-left eye: x = 186 y = 136
-right eye: x = 186 y = 136
-left nostril: x = 186 y = 136
-right nostril: x = 186 y = 136
-mouth (left corner): x = 186 y = 137
-mouth (right corner): x = 186 y = 137
-mouth (upper lip): x = 186 y = 138
-mouth (lower lip): x = 186 y = 138
-chin: x = 186 y = 139
-left ear: x = 186 y = 139
-right ear: x = 186 y = 139
+left eye: x = 158 y = 143
+right eye: x = 169 y = 146
+left nostril: x = 141 y = 142
+right nostril: x = 160 y = 146
+mouth (left corner): x = 169 y = 159
+mouth (right corner): x = 172 y = 161
+mouth (upper lip): x = 173 y = 164
+mouth (lower lip): x = 173 y = 164
+chin: x = 173 y = 164
+left ear: x = 174 y = 167
+right ear: x = 192 y = 200

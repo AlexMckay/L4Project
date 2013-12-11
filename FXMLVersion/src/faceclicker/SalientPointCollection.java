@@ -56,9 +56,10 @@ public class SalientPointCollection {
 		}
 	}
         
-        //writes the list of x and y values for all the salient points to a file
-        public void writePoints(String s) throws FileNotFoundException, UnsupportedEncodingException{
-            String outputfile = s + ".txt";
+    //writes the list of x and y values for all the salient points to a file
+    public void writePoints(String filename) throws FileNotFoundException, UnsupportedEncodingException{
+            String outputfile = filename + ".txt";
+            System.out.println(filename);
             PrintWriter writer = new PrintWriter(outputfile, "UTF-8");
             
             for (SalientPoint sp : spArray){

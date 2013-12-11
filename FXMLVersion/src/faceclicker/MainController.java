@@ -6,21 +6,27 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBoxBuilder;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
@@ -93,7 +99,11 @@ public class MainController {
     }
 
     @FXML protected void handleNextImage(ActionEvent event) {
-    	displayImage(imageList.get(++dirIterator));
+    	if((dirIterator+1)<imageList.size()){
+    		displayImage(imageList.get(++dirIterator));
+    	}else{
+    		alert("Directory emptied");
+    	}
     }
     
     //function that handles mouse clicks: stores x+y data in current SP and moves on to next one
@@ -103,7 +113,7 @@ public class MainController {
                 SalientPoint sp = points.getCurrent();
 	        	sp.setX(me.getX());
 	        	sp.setY(me.getY());
-	        	sp.printValues();
+	        	//sp.printValues();
 	        	
 	        	Circle c = new Circle();
 	        	c.setRadius(2);
@@ -118,7 +128,7 @@ public class MainController {
 	        		//displays the name of the next point to click
 	        		nextclickmessage.setText(points.getCurrent().getName());
 	        	}else{
-	        		nextclickmessage.setText("done!");
+	        		nextclickmessage.setText("Image finished");
                     try {
                         points.writePoints(fileName);
                     } catch (FileNotFoundException ex) {
@@ -137,10 +147,8 @@ public class MainController {
 
         //get all the files from a directory
         File[] fList = directory.listFiles();
-
         for (File file : fList) {
             if (file.isFile()) {
-                //System.out.println(file.getName());
                 fileNames.add(file.getAbsolutePath());
             }
         }
@@ -149,24 +157,30 @@ public class MainController {
     
     public void displayImage(String imageName){
     	
-    	points  = new SalientPointCollection();
-    	wipeCircles();
-    	//display first salient point to click
-    	nextclickmessage.setText(points.getCurrent().getName());
+    	String fileExt = imageName.substring(imageName.lastIndexOf('.') + 1);
     	
-	    try {
-	        //read in selected file
-	    	File file = new File(imageName);
-	    	fileName = file.getName();
-	        BufferedImage bufferedImage = ImageIO.read(file);
-	        Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-	        activated = true;
-	        
-	        //display image
-	        imagebox.setImage(image);
-	    } catch (IOException ex) {
-	        Logger.getLogger(MainStage.class.getName()).log(Level.SEVERE, null, ex);
-	    }
+    	if (canReadExtension(fileExt)) {
+	    	points = new SalientPointCollection();
+	    	wipeCircles();
+	    	nextclickmessage.setText(points.getCurrent().getName());	//display first salient point to click    	
+
+		    try {
+		    	File file = new File(imageName);
+		    	fileName = file.getAbsolutePath();						//change to getName once allowing output dir choice
+		        BufferedImage bufferedImage = ImageIO.read(file);
+		        Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+		        activated = true;
+		        imagebox.setImage(image);
+		    } catch (IOException ex) {
+		        Logger.getLogger(MainStage.class.getName()).log(Level.SEVERE, null, ex);
+		    }
+    	}else{
+    		if((dirIterator+1)<imageList.size()){
+    			displayImage(imageList.get(++dirIterator));
+    		}else{
+        		alert("Directory emptied");
+        	}
+    	}
     }
 
     public void wipeCircles(){
@@ -176,4 +190,19 @@ public class MainController {
         circleList.removeAll(circleList);
     }
 
- }
+    public boolean canReadExtension(String fileExt) {
+        Iterator i = ImageIO.getImageReadersBySuffix(fileExt);
+        return i.hasNext();
+}
+
+    public void alert(String s){
+    	nextclickmessage.setText("Directory emptied");
+    	Stage dialogStage = new Stage();
+    	dialogStage.initModality(Modality.WINDOW_MODAL);
+    	dialogStage.setScene(new Scene(VBoxBuilder.create().
+    	    children(new Text(s)).
+    	    alignment(Pos.CENTER).padding(new Insets(5)).build()));
+    	dialogStage.show();
+    }
+
+}

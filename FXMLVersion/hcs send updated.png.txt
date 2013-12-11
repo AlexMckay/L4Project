@@ -1,0 +1,11 @@
+left eye: x = 94 y = 62
+right eye: x = 125 y = 36
+left nostril: x = 165 y = 37
+right nostril: x = 117 y = 37
+mouth (left corner): x = 107 y = 62
+mouth (right corner): x = 179 y = 31
+mouth (upper lip): x = 134 y = 25
+mouth (lower lip): x = 193 y = 54
+chin: x = 209 y = 37
+left ear: x = 200 y = 36
+right ear: x = 198 y = 40

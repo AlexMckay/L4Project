@@ -1,0 +1,11 @@
+left eye: x = 221 y = 260
+right eye: x = 176 y = 341
+left nostril: x = 153 y = 367
+right nostril: x = 224 y = 366
+mouth (left corner): x = 211 y = 363
+mouth (right corner): x = 209 y = 426
+mouth (upper lip): x = 216 y = 427
+mouth (lower lip): x = 210 y = 427
+chin: x = 201 y = 439
+left ear: x = 201 y = 449
+right ear: x = 202 y = 449
