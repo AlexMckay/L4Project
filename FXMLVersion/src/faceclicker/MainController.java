@@ -40,13 +40,13 @@ public class MainController {
     @FXML private Text nextclickmessage;
     @FXML private Pane pane1;
     @FXML private ImageView imageBox;
-    @FXML private Label imageName, dirCount;
-    @FXML private ComboBox imageCombo;
+    @FXML private Label dirCount;
+    @FXML private ComboBox<String> imageCombo;
     private SalientPointCollection points;
     private boolean activated = false; //activated is to check an image has been loaded
     private ArrayList<Circle> circleList = new ArrayList<Circle>();
-    private String filePath;
-    private ArrayList<String> imageList;
+    private String filePath, dirPath;
+    private ArrayList<String> fileList, imageList, pointsList;
     private int dirIterator;
     
     //function to load new images when the button is pressed
@@ -86,7 +86,7 @@ public class MainController {
         nextclickmessage.setText(points.getCurrent().getName());
     }
     
-    @FXML protected void handleLoadButtonAction2(ActionEvent event) throws InterruptedException {
+    @FXML protected void handleLoadDirButton(ActionEvent event) throws InterruptedException {
     	
 		Stage primaryStage = (Stage) imageBox.getScene().getWindow();
     	points  = new SalientPointCollection();
@@ -97,19 +97,41 @@ public class MainController {
         File defaultDirectory = new File("c:/");
         chooser.setInitialDirectory(defaultDirectory);
         File dir = chooser.showDialog(primaryStage);
-        imageList = listFiles(dir);
-        imageCombo.setItems(FXCollections.observableArrayList(imageList));
+        fileList = listFiles(dir);
+        imageList = parseImages(fileList);
+        
+        imageCombo.setItems(FXCollections.observableArrayList(extractFileNames(imageList)));
         
 	    displayImage(imageList.get(dirIterator));
 		    
 		    
     }
 
-    @FXML protected void handleNextImage(ActionEvent event) {
+    @FXML protected void handleNextImageButton(ActionEvent event) {
     	if((dirIterator+1)<imageList.size()){
     		displayImage(imageList.get(++dirIterator));
     	}else{
     		alert("Directory emptied");
+    	}
+    }
+    
+    @FXML protected void handleComboChange(ActionEvent event){
+    	int i = imageCombo.getSelectionModel().getSelectedIndex();
+    	if (i>(-1) && i!=dirIterator){
+    		dirIterator = i;
+    		displayImage(imageList.get(dirIterator));
+    	}
+    }
+    
+    @FXML protected void handleUndoButton(ActionEvent event){
+    	if(activated){
+	    	points.undo();
+	    	pane1.getChildren().remove(circleList.remove(circleList.size()-1));
+	    	nextclickmessage.setText(points.getCurrent().getName());
+    	}else{
+    		activated=true;
+    		pane1.getChildren().remove(circleList.remove(circleList.size()-1));
+	    	nextclickmessage.setText(points.getCurrent().getName());
     	}
     }
     
@@ -162,6 +184,26 @@ public class MainController {
         return fileNames;
     }
     
+    public ArrayList<String> extractFileNames(ArrayList<String> files){
+    	ArrayList<String> fileNames = new ArrayList<>();
+    	for (String s : files){
+    		String fileName = s.substring(s.lastIndexOf("\\") + 1);
+    		fileNames.add(fileName);
+    	}
+    	return fileNames;
+    }
+    
+    public ArrayList<String> parseImages(ArrayList<String> files){
+    	ArrayList<String> images = new ArrayList<>();
+    	for (String s : files){
+    		String fileExt = s.substring(s.lastIndexOf(".") + 1);
+    		if (canReadExtension(fileExt)) {
+    			images.add(s);
+    		}
+    	}
+    	return images;
+    }
+    
     public void displayImage(String imageName){
     	
     	String fileExt = imageName.substring(imageName.lastIndexOf('.') + 1);
@@ -178,7 +220,6 @@ public class MainController {
 		        Image image = SwingFXUtils.toFXImage(bufferedImage, null);
 		        activated = true;
 		        imageBox.setImage(image);
-		        setImageName(file.getName());
 		        setDirCount(dirIterator, imageList.size());
 		    } catch (IOException ex) {
 		        Logger.getLogger(MainStage.class.getName()).log(Level.SEVERE, null, ex);
@@ -190,6 +231,8 @@ public class MainController {
         		alert("Directory emptied");
         	}
     	}
+    	
+    	imageCombo.getSelectionModel().select(dirIterator);
     }
 
     public void wipeCircles(){
@@ -214,11 +257,8 @@ public class MainController {
     	dialogStage.show();
     }
 
-    public void setImageName(String name){
-    	imageName.setText(name);
-    }
     
     public void setDirCount(int number, int total){
-    	dirCount.setText(String.format("%d/%d", number, total));
+    	dirCount.setText(String.format("%d/%d", number+1, total));
     }
 }

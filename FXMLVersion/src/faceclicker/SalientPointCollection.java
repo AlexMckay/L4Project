@@ -49,6 +49,12 @@ public class SalientPointCollection {
 		currentPoint++;
 	}
 	
+	public void undo(){
+		if(currentPoint>0){
+			currentPoint--;
+		}
+	}
+	
 	//outputs the list of x and y values for all the salient points to std output
 	public void printPoints(){
 		for (SalientPoint sp : spArray){
