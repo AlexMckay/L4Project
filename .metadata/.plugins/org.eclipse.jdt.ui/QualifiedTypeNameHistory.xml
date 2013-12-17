@@ -18,4 +18,7 @@
 <fullyQualifiedTypeName name="javafx.stage.DirectoryChooser"/>
 <fullyQualifiedTypeName name="javafx.stage.Stage"/>
 <fullyQualifiedTypeName name="java.awt.image.MemoryImageSource"/>
+<fullyQualifiedTypeName name="javafx.scene.control.Label"/>
+<fullyQualifiedTypeName name="javafx.scene.control.ComboBox"/>
+<fullyQualifiedTypeName name="javafx.collections.FXCollections"/>
 </qualifiedTypeNameHistroy>

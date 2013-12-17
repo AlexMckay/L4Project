@@ -10,12 +10,16 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -35,11 +39,13 @@ public class MainController {
 	
     @FXML private Text nextclickmessage;
     @FXML private Pane pane1;
-    @FXML private ImageView imagebox;
+    @FXML private ImageView imageBox;
+    @FXML private Label imageName, dirCount;
+    @FXML private ComboBox imageCombo;
     private SalientPointCollection points;
     private boolean activated = false; //activated is to check an image has been loaded
     private ArrayList<Circle> circleList = new ArrayList<Circle>();
-    private String fileName;
+    private String filePath;
     private ArrayList<String> imageList;
     private int dirIterator;
     
@@ -62,7 +68,7 @@ public class MainController {
           
         //show open file dialog
         File file = fileChooser.showOpenDialog(null);
-        fileName = file.getName();
+        filePath = file.getName();
                    
         try {
             //read in selected file
@@ -71,7 +77,7 @@ public class MainController {
             activated = true;
             
             //display image
-            imagebox.setImage(image);
+            imageBox.setImage(image);
         } catch (IOException ex) {
             Logger.getLogger(MainStage.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -82,7 +88,7 @@ public class MainController {
     
     @FXML protected void handleLoadButtonAction2(ActionEvent event) throws InterruptedException {
     	
-		Stage primaryStage = (Stage) imagebox.getScene().getWindow();
+		Stage primaryStage = (Stage) imageBox.getScene().getWindow();
     	points  = new SalientPointCollection();
     	dirIterator = 0;
   
@@ -92,6 +98,7 @@ public class MainController {
         chooser.setInitialDirectory(defaultDirectory);
         File dir = chooser.showDialog(primaryStage);
         imageList = listFiles(dir);
+        imageCombo.setItems(FXCollections.observableArrayList(imageList));
         
 	    displayImage(imageList.get(dirIterator));
 		    
@@ -130,7 +137,7 @@ public class MainController {
 	        	}else{
 	        		nextclickmessage.setText("Image finished");
                     try {
-                        points.writePoints(fileName);
+                        points.writePoints(filePath);
                     } catch (FileNotFoundException ex) {
                         Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (UnsupportedEncodingException ex) {
@@ -166,11 +173,13 @@ public class MainController {
 
 		    try {
 		    	File file = new File(imageName);
-		    	fileName = file.getAbsolutePath();						//change to getName once allowing output dir choice
+		    	filePath = file.getAbsolutePath();						//change to getName once allowing output dir choice
 		        BufferedImage bufferedImage = ImageIO.read(file);
 		        Image image = SwingFXUtils.toFXImage(bufferedImage, null);
 		        activated = true;
-		        imagebox.setImage(image);
+		        imageBox.setImage(image);
+		        setImageName(file.getName());
+		        setDirCount(dirIterator, imageList.size());
 		    } catch (IOException ex) {
 		        Logger.getLogger(MainStage.class.getName()).log(Level.SEVERE, null, ex);
 		    }
@@ -205,4 +214,11 @@ public class MainController {
     	dialogStage.show();
     }
 
+    public void setImageName(String name){
+    	imageName.setText(name);
+    }
+    
+    public void setDirCount(int number, int total){
+    	dirCount.setText(String.format("%d/%d", number, total));
+    }
 }
