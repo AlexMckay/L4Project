@@ -48,6 +48,7 @@ public class MainController {
     private String filePath, dirPath;
     private ArrayList<String> fileList, imageList, pointsList;
     private int dirIterator;
+    private double curWidth, curHeight;
     
     //function to load new images when the button is pressed
     @FXML protected void handleLoadButtonAction(ActionEvent event) {
@@ -134,14 +135,24 @@ public class MainController {
 	    	nextclickmessage.setText(points.getCurrent().getName());
     	}
     }
+  
+    @FXML protected void handleResetButton(ActionEvent event){
+    	points = new SalientPointCollection();
+    	wipeCircles();
+    	nextclickmessage.setText(points.getCurrent().getName());
+    	activated=true;
+    }
     
     //function that handles mouse clicks: stores x+y data in current SP and moves on to next one
     @FXML protected SalientPoint grabCoords(MouseEvent me){
+    	double mouseX = me.getX();
+    	double mouseY = me.getY();
     	
-    	if (activated){    		
+    	if (activated){
+    		if(mouseX<=curWidth && mouseY<=curHeight){
                 SalientPoint sp = points.getCurrent();
-	        	sp.setX(me.getX());
-	        	sp.setY(me.getY());
+	        	sp.setX(mouseX);
+	        	sp.setY(mouseY);
 	        	//sp.printValues();
 	        	
 	        	Circle c = new Circle();
@@ -167,6 +178,7 @@ public class MainController {
                     }
 		    		activated = false;
 	        	}
+    		}
     	}
     	return null;
     }
@@ -218,6 +230,8 @@ public class MainController {
 		    	filePath = file.getAbsolutePath();						//change to getName once allowing output dir choice
 		        BufferedImage bufferedImage = ImageIO.read(file);
 		        Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+		        curWidth = image.getWidth();
+		        curHeight = image.getHeight();
 		        activated = true;
 		        imageBox.setImage(image);
 		        setDirCount(dirIterator, imageList.size());
@@ -248,7 +262,7 @@ public class MainController {
 }
 
     public void alert(String s){
-    	nextclickmessage.setText("Directory emptied");
+    	nextclickmessage.setText(s);
     	Stage dialogStage = new Stage();
     	dialogStage.initModality(Modality.WINDOW_MODAL);
     	dialogStage.setScene(new Scene(VBoxBuilder.create().
@@ -256,7 +270,6 @@ public class MainController {
     	    alignment(Pos.CENTER).padding(new Insets(5)).build()));
     	dialogStage.show();
     }
-
     
     public void setDirCount(int number, int total){
     	dirCount.setText(String.format("%d/%d", number+1, total));

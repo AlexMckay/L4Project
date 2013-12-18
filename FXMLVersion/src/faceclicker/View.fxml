@@ -10,29 +10,28 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane fx:id="gpane" maxHeight="352.0" alignment="TOP_LEFT" hgap="2.0" vgap="2.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="faceclicker.MainController">
-  <Pane fx:id="pane1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="350.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+<GridPane fx:id="gpane" alignment="TOP_LEFT" hgap="0.0" maxHeight="350.0" prefHeight="350.0" vgap="0.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="faceclicker.MainController">
+  <Pane fx:id="pane1" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="350.0" style="" GridPane.columnIndex="0" GridPane.rowIndex="0">
     <children>
-      <ImageView id="imagebox" fx:id="imageBox" fitHeight="0.0" fitWidth="0.0" />
+      <ImageView id="imagebox" fx:id="imageBox" fitHeight="0.0" fitWidth="0.0" style="" />
     </children>
   </Pane>
-  <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-1.0" minWidth="-Infinity" prefHeight="200.0" prefWidth="150.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+  <VBox id="control-box" alignment="TOP_CENTER" maxHeight="-1.0" maxWidth="-Infinity" minHeight="-1.0" minWidth="-Infinity" prefHeight="-1.0" prefWidth="150.0" spacing="10.0" style="" GridPane.columnIndex="1" GridPane.rowIndex="0">
     <children>
-      <Button maxWidth="-Infinity" minWidth="-Infinity" onAction="#handleLoadButtonAction2" prefWidth="148.0" text="Load Directory" />
-      <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleNextImage" prefHeight="50.0" prefWidth="148.0" text="Next Image" />
-      <ComboBox fx:id="imageCombo" prefWidth="148.0" promptText="Jump to image...">
-      </ComboBox>
-      <Label text="Current Image:" />
-      <Label fx:id="imageName" text="None" />
+      <Button maxWidth="-Infinity" minWidth="-Infinity" onAction="#handleLoadDirButton" prefWidth="140.0" text="Load Directory" />
+      <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleNextImageButton" prefHeight="50.0" prefWidth="140.0" text="Next Image" />
+      <ComboBox fx:id="imageCombo" minWidth="-Infinity" onAction="#handleComboChange" prefWidth="140.0" promptText="None" />
       <Label fx:id="dirCount" text="No directory loaded" />
       <Text fx:id="nextclickmessage">
         <VBox.margin>
-          <Insets bottom="40.0" top="40.0" />
+          <Insets bottom="60.0" top="60.0" />
         </VBox.margin>
       </Text>
+      <Button fx:id="undoButton" minHeight="-1.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleUndoButton" prefWidth="140.0" text="Undo" />
+      <Button id="undoButton" minHeight="-1.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleResetButton" prefWidth="140.0" text="Reset" />
     </children>
     <padding>
-      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
     </padding>
   </VBox>
   <columnConstraints>
@@ -40,7 +39,7 @@
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" />
   </columnConstraints>
   <padding>
-    <Insets bottom="2.0" />
+    <Insets />
   </padding>
   <rowConstraints>
     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
