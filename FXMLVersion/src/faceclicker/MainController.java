@@ -154,14 +154,9 @@ public class MainController {
 	        	sp.setX(mouseX);
 	        	sp.setY(mouseY);
 	        	//sp.printValues();
-	        	
-	        	Circle c = new Circle();
-	        	c.setRadius(2);
-	        	c.setFill(Color.RED);
-	        	c.setCenterX(sp.getX());
-	        	c.setCenterY(sp.getY());                 
-                circleList.add(c);                      
-	        	pane1.getChildren().add(c);
+	        	                
+                circleList.add(sp.getCircle());                      
+	        	pane1.getChildren().add(sp.getCircle());
 	        	
 	        	if (points.hasNext()){
 	        		points.iterate();
