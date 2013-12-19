@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -87,7 +88,7 @@ public class MainController {
         nextclickmessage.setText(points.getCurrent().getName());
     }
     
-    @FXML protected void handleLoadDirButton(ActionEvent event) throws InterruptedException {
+    @FXML protected void handleLoadDirButton(ActionEvent event) throws InterruptedException, IOException {
     	
 		Stage primaryStage = (Stage) imageBox.getScene().getWindow();
     	points  = new SalientPointCollection();
@@ -108,7 +109,7 @@ public class MainController {
 		    
     }
 
-    @FXML protected void handleNextImageButton(ActionEvent event) {
+    @FXML protected void handleNextImageButton(ActionEvent event) throws IOException {
     	if((dirIterator+1)<imageList.size()){
     		displayImage(imageList.get(++dirIterator));
     	}else{
@@ -116,7 +117,7 @@ public class MainController {
     	}
     }
     
-    @FXML protected void handleComboChange(ActionEvent event){
+    @FXML protected void handleComboChange(ActionEvent event) throws IOException{
     	int i = imageCombo.getSelectionModel().getSelectedIndex();
     	if (i>(-1) && i!=dirIterator){
     		dirIterator = i;
@@ -127,7 +128,9 @@ public class MainController {
     @FXML protected void handleUndoButton(ActionEvent event){
     	if(activated){
 	    	points.undo();
-	    	pane1.getChildren().remove(circleList.remove(circleList.size()-1));
+	    	if(!circleList.isEmpty()){
+	    		pane1.getChildren().remove(circleList.remove(circleList.size()-1));
+	    	}
 	    	nextclickmessage.setText(points.getCurrent().getName());
     	}else{
     		activated=true;
@@ -201,38 +204,45 @@ public class MainController {
     }
     
     public ArrayList<String> parseImages(ArrayList<String> files){
+    	pointsList=new ArrayList<>(); //---------
     	ArrayList<String> images = new ArrayList<>();
     	for (String s : files){
     		String fileExt = s.substring(s.lastIndexOf(".") + 1);
     		if (canReadExtension(fileExt)) {
     			images.add(s);
+    		}else if (fileExt.equals("txt")) { //-----------
+    			pointsList.add(s);
     		}
     	}
     	return images;
     }
     
-    public void displayImage(String imageName){
+    public void displayImage(String imageName) throws IOException{
     	
     	String fileExt = imageName.substring(imageName.lastIndexOf('.') + 1);
     	
     	if (canReadExtension(fileExt)) {
+    		
 	    	points = new SalientPointCollection();
-	    	wipeCircles();
-	    	nextclickmessage.setText(points.getCurrent().getName());	//display first salient point to click    	
+	    	wipeCircles(); 	
 
-		    try {
-		    	File file = new File(imageName);
-		    	filePath = file.getAbsolutePath();						//change to getName once allowing output dir choice
-		        BufferedImage bufferedImage = ImageIO.read(file);
-		        Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-		        curWidth = image.getWidth();
-		        curHeight = image.getHeight();
-		        activated = true;
-		        imageBox.setImage(image);
-		        setDirCount(dirIterator, imageList.size());
-		    } catch (IOException ex) {
-		        Logger.getLogger(MainStage.class.getName()).log(Level.SEVERE, null, ex);
-		    }
+	    	File file = new File(imageName);
+	    	filePath = file.getAbsolutePath();
+	    	String txtName = filePath + ".txt";									//---------------
+	    	if(pointsList.contains(txtName)){
+	    		loadPoints(txtName);
+	    	}else{
+	    		nextclickmessage.setText(points.getCurrent().getName());	//display first salient point to click
+	    	}   
+	        BufferedImage bufferedImage = ImageIO.read(file);
+	        Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+	        
+	        curWidth = image.getWidth();
+	        curHeight = image.getHeight();
+	        activated = true;
+	        imageBox.setImage(image);
+	        setDirCount(dirIterator, imageList.size());
+	        
     	}else{
     		if((dirIterator+1)<imageList.size()){
     			displayImage(imageList.get(++dirIterator));
@@ -268,5 +278,36 @@ public class MainController {
     
     public void setDirCount(int number, int total){
     	dirCount.setText(String.format("%d/%d", number+1, total));
+    }
+
+    public void loadPoints(String pointsFile) throws FileNotFoundException{
+    	File file = new File(pointsFile);
+    	String temp;
+    	Scanner fileScanner = new Scanner(file);
+    	
+    	while (fileScanner.hasNextLine()){
+    		SalientPoint sp = points.getCurrent();
+    		int x, y;
+    		String line = fileScanner.nextLine();
+    		String pointName = line.substring(0, line.lastIndexOf(':'));
+    		String values = line.substring(line.lastIndexOf(':') + 2);
+    		
+    		Scanner lineScanner = new Scanner(values);
+    		temp = lineScanner.next(); //x
+    		temp = lineScanner.next(); //=
+    		x = lineScanner.nextInt();
+    		temp = lineScanner.next(); //y
+    		temp = lineScanner.next(); //=
+    		y = lineScanner.nextInt();
+    		sp.setX(x);
+    		sp.setY(y);
+            circleList.add(sp.getCircle());                      
+        	pane1.getChildren().add(sp.getCircle());
+        	points.iterate();
+        	nextclickmessage.setText("Points loaded from file");
+    		
+    		lineScanner.close();
+    	}
+    	fileScanner.close();
     }
 }
