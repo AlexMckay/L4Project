@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="FaceClicker.jnlp">
+  <information>
+    <title>FaceClicker</title>
+    <vendor>xen</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <jfx:javafx-runtime version="2.2+" href="http://javadl.sun.com/webapps/download/GetFile/javafx-latest/windows-i586/javafx2.jnlp"/>
+  </resources>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="FaceClicker.jar" size="31229" download="eager" />
+    <jar href="lib/jai_core.jar" size="1900631" download="eager" />
+    <jar href="lib/jai_imageio.jar" size="1140632" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="FaceClicker" >
+    <param name="requiredFXVersion" value="2.2+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="faceclicker.MainStage"  name="FaceClicker" />
+  <update check="always"/>
+</jnlp>
