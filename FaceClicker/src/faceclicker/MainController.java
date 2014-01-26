@@ -172,7 +172,7 @@ public class MainController {
     	
     	String fileExt = imageName.substring(imageName.lastIndexOf('.') + 1);
     	
-    	if (canReadExtension(fileExt)) {
+    	if (dirContents.canReadExtension(fileExt)) {
     		
 	    	points = new SalientPointCollection();
 	    	wipeCircles(); 	
@@ -196,6 +196,7 @@ public class MainController {
 	        
     	}else{
     		if((dirIterator+1)<dirContents.getImageList().size()){
+                        System.out.println("picture skipped");
     			displayImage(dirContents.getImageList().get(++dirIterator));
     		}else{
         		alert("Directory emptied");
@@ -256,11 +257,6 @@ public class MainController {
     	}
     	fileScanner.close();
     }
-    
-    public boolean canReadExtension(String fileExt) {
-        Iterator i = ImageIO.getImageReadersBySuffix(fileExt);
-        return i.hasNext();
-}
 
     public void undo(){
         if(activated){
