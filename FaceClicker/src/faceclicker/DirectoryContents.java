@@ -8,15 +8,15 @@ import javax.imageio.ImageIO;
 
 public class DirectoryContents {
 	
-	private ArrayList<String> imageList, pointList;
-	private int iterator;
-	
-	public DirectoryContents(File dirPath){
-		ArrayList<String> allFiles = listFiles(dirPath);
-		imageList = parseImages(allFiles);
-		pointList = parsePoints(allFiles);
-		iterator=0;
-	}
+    private ArrayList<String> imageList, pointList;
+    private int iterator;
+
+    public DirectoryContents(File dirPath){
+            ArrayList<String> allFiles = listFiles(dirPath);
+            imageList = parseImages(allFiles);
+            pointList = parsePoints(allFiles);
+            iterator=0;
+    }
 	
     public ArrayList<String> listFiles(File directory) {
         ArrayList<String> fileNames = new ArrayList<>();
@@ -83,5 +83,17 @@ public class DirectoryContents {
 
     public void setIterator(int i){
     	iterator = i;
+    }
+
+    public ArrayList<String> getImageList(){
+        return imageList;
+    }
+    
+    public ArrayList<String> getPointsList(){
+        return pointList;
+    }
+    
+    public ArrayList<String> getImageNames(){
+        return extractFileNames(imageList);
     }
 }

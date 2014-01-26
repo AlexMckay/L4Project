@@ -43,9 +43,9 @@ public class MainController {
     @FXML private ComboBox<String> imageCombo;
     private SalientPointCollection points;
     private boolean activated = false; //activated is to check an image has been loaded
-    private ArrayList<Circle> circleList = new ArrayList<>();
-    private String filePath, dirPath;
-    private ArrayList<String> fileList, imageList, pointsList;
+    private final ArrayList<Circle> circleList = new ArrayList<>();
+    private String filePath;
+    private DirectoryContents dirContents;
     private int dirIterator;
     private double curWidth, curHeight;
     
@@ -96,20 +96,19 @@ public class MainController {
         chooser.setTitle("Choose Directory");
         File defaultDirectory = new File("c:/");
         chooser.setInitialDirectory(defaultDirectory);
-        File dir = chooser.showDialog(primaryStage);
-        fileList = listFiles(dir);
-        imageList = parseImages(fileList);
+        File dirPath = chooser.showDialog(primaryStage);
+        dirContents = new DirectoryContents(dirPath);
         
-        imageCombo.setItems(FXCollections.observableArrayList(extractFileNames(imageList)));
+        imageCombo.setItems(FXCollections.observableArrayList(dirContents.getImageNames()));
         
-	    displayImage(imageList.get(dirIterator));
+	    displayImage(dirContents.getImageList().get(dirIterator));
 		    
 		    
     }
 
     @FXML protected void handleNextImageButton(ActionEvent event) throws IOException {
-    	if((dirIterator+1)<imageList.size()){
-    		displayImage(imageList.get(++dirIterator));
+    	if( (dirIterator+1) < dirContents.getImageList().size() ){
+    		displayImage(dirContents.getImageList().get(++dirIterator));
     	}else{
     		alert("Directory emptied");
     	}
@@ -119,7 +118,7 @@ public class MainController {
     	int i = imageCombo.getSelectionModel().getSelectedIndex();
     	if (i>(-1) && i!=dirIterator){
     		dirIterator = i;
-    		displayImage(imageList.get(dirIterator));
+    		displayImage(dirContents.getImageList().get(dirIterator));
     	}
     }
     
@@ -169,42 +168,6 @@ public class MainController {
     	return null;
     }
     
-    public ArrayList<String> listFiles(File directory) {
-        ArrayList<String> fileNames = new ArrayList<>();
-
-        //get all the files from a directory
-        File[] fList = directory.listFiles();
-        for (File file : fList) {
-            if (file.isFile()) {
-                fileNames.add(file.getAbsolutePath());
-            }
-        }
-        return fileNames;
-    }
-    
-    public ArrayList<String> extractFileNames(ArrayList<String> files){
-    	ArrayList<String> fileNames = new ArrayList<>();
-    	for (String s : files){
-    		String fileName = s.substring(s.lastIndexOf("\\") + 1);
-    		fileNames.add(fileName);
-    	}
-    	return fileNames;
-    }
-    
-    public ArrayList<String> parseImages(ArrayList<String> files){
-    	pointsList=new ArrayList<>(); //---------
-    	ArrayList<String> images = new ArrayList<>();
-    	for (String s : files){
-    		String fileExt = s.substring(s.lastIndexOf(".") + 1);
-    		if (canReadExtension(fileExt)) {
-    			images.add(s);
-    		}else if (fileExt.equals("txt")) { //-----------
-    			pointsList.add(s);
-    		}
-    	}
-    	return images;
-    }
-    
     public void displayImage(String imageName) throws IOException{
     	
     	String fileExt = imageName.substring(imageName.lastIndexOf('.') + 1);
@@ -217,7 +180,7 @@ public class MainController {
 	    	File file = new File(imageName);
 	    	filePath = file.getAbsolutePath();
 	    	String txtName = filePath + ".txt";									//---------------
-	    	if(pointsList.contains(txtName)){
+	    	if(dirContents.getPointsList().contains(txtName)){
 	    		loadPoints(txtName);
 	    	}else{
 	    		nextclickmessage.setText(points.getCurrent().getName());	//display first salient point to click
@@ -229,11 +192,11 @@ public class MainController {
 	        curHeight = image.getHeight();
 	        activated = true;
 	        imageBox.setImage(image);
-	        setDirCount(dirIterator, imageList.size());
+	        setDirCount(dirIterator, dirContents.getImageList().size());
 	        
     	}else{
-    		if((dirIterator+1)<imageList.size()){
-    			displayImage(imageList.get(++dirIterator));
+    		if((dirIterator+1)<dirContents.getImageList().size()){
+    			displayImage(dirContents.getImageList().get(++dirIterator));
     		}else{
         		alert("Directory emptied");
         	}
@@ -248,11 +211,6 @@ public class MainController {
         }      
         circleList.removeAll(circleList);
     }
-
-    public boolean canReadExtension(String fileExt) {
-        Iterator i = ImageIO.getImageReadersBySuffix(fileExt);
-        return i.hasNext();
-}
 
     public void alert(String s){
     	nextclickmessage.setText(s);
@@ -298,6 +256,11 @@ public class MainController {
     	}
     	fileScanner.close();
     }
+    
+    public boolean canReadExtension(String fileExt) {
+        Iterator i = ImageIO.getImageReadersBySuffix(fileExt);
+        return i.hasNext();
+}
 
     public void undo(){
         if(activated){

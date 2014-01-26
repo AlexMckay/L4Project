@@ -47,7 +47,6 @@ public class MainStage extends Application {
                 @Override
                 public void handle(KeyEvent ke) {
                     if (undoCombo.match(ke)) {
-                        System.out.println("undo pressed");
                         controller.undo();
                     }
                 }
