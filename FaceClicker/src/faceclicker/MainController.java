@@ -12,7 +12,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,7 +43,7 @@ public class MainController {
     @FXML private ComboBox<String> imageCombo;
     private SalientPointCollection points;
     private boolean activated = false; //activated is to check an image has been loaded
-    private ArrayList<Circle> circleList = new ArrayList<Circle>();
+    private ArrayList<Circle> circleList = new ArrayList<>();
     private String filePath, dirPath;
     private ArrayList<String> fileList, imageList, pointsList;
     private int dirIterator;
@@ -125,17 +124,7 @@ public class MainController {
     }
     
     @FXML protected void handleUndoButton(ActionEvent event){
-    	if(activated){
-	    	points.undo();
-	    	if(!circleList.isEmpty()){
-	    		pane1.getChildren().remove(circleList.remove(circleList.size()-1));
-	    	}
-	    	nextclickmessage.setText(points.getCurrent().getName());
-    	}else{
-    		activated=true;
-    		pane1.getChildren().remove(circleList.remove(circleList.size()-1));
-	    	nextclickmessage.setText(points.getCurrent().getName());
-    	}
+        undo();
     }
   
     @FXML protected void handleResetButton(ActionEvent event){
@@ -308,5 +297,19 @@ public class MainController {
     		lineScanner.close();
     	}
     	fileScanner.close();
+    }
+
+    public void undo(){
+        if(activated){
+            points.undo();
+            if(!circleList.isEmpty()){
+                    pane1.getChildren().remove(circleList.remove(circleList.size()-1));
+            }
+            nextclickmessage.setText(points.getCurrent().getName());
+    	}else{
+            activated=true;
+            pane1.getChildren().remove(circleList.remove(circleList.size()-1));
+            nextclickmessage.setText(points.getCurrent().getName());
+    	}
     }
 }

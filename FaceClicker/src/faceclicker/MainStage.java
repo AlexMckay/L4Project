@@ -7,6 +7,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -26,6 +30,7 @@ public class MainStage extends Application {
         fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
         Parent root = (Parent) fxmlLoader.load(location.openStream());
         final MainController controller = (MainController) fxmlLoader.getController();
+        final KeyCombination undoCombo = new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN);
         
         primaryStage.setTitle("Face Clicker");
         primaryStage.setScene(new Scene(root, 662, 700));
@@ -36,6 +41,16 @@ public class MainStage extends Application {
         	public void handle(MouseEvent me) {
                 	SalientPoint sp = controller.grabCoords(me);	
         	}
+        });
+        
+        primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent ke) {
+                    if (undoCombo.match(ke)) {
+                        System.out.println("undo pressed");
+                        controller.undo();
+                    }
+                }
         });
         
         primaryStage.setX(50);
