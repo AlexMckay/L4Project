@@ -72,12 +72,8 @@ public class MainController {
     }
 
     @FXML
-    protected void handleNextImageButton(ActionEvent event) throws IOException {
-        if (dirContents.hasNext()) {
-            displayImage(dirContents.getNextImage());
-        } else {
-            alert("Directory emptied");
-        }
+    protected void handleNextImageButton(ActionEvent event) {
+        nextImage();
     }
 
     @FXML
@@ -235,6 +231,18 @@ public class MainController {
             activated = true;
             pane1.getChildren().remove(circleList.remove(circleList.size() - 1));
             nextclickmessage.setText(points.getCurrent().getName());
+        }
+    }
+    
+    public void nextImage() {
+        if (dirContents.hasNext()) {
+            try {
+                displayImage(dirContents.getNextImage());
+            } catch (IOException ex) {
+                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            alert("Directory emptied");
         }
     }
 }

@@ -67,6 +67,10 @@ public class DirectoryContents {
         return i.hasNext();
 }
     
+    public boolean hasNext(){
+        return (iterator+1) < imageList.size();
+    }
+    
     public String getImage(int location){
     	iterator=location;
     	return imageList.get(location);
@@ -81,6 +85,10 @@ public class DirectoryContents {
     	iterator++;
     }
 
+    public int getIterator(){
+        return iterator;
+    }
+    
     public void setIterator(int i){
     	iterator = i;
     }
