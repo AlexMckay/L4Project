@@ -65,7 +65,7 @@ public class MainController {
         File dirPath = chooser.showDialog(primaryStage);
         dirContents = new DirectoryContents(dirPath);
 
-        imageCombo.setItems(FXCollections.observableArrayList(dirContents.getImageNames()));
+        imageCombo.setItems(FXCollections.observableArrayList(dirContents.getImageNamesList()));
 
         displayImage(dirContents.getImage(0));
 

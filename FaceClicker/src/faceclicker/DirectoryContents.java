@@ -101,7 +101,16 @@ public class DirectoryContents {
         return pointList;
     }
     
-    public ArrayList<String> getImageNames(){
-        return extractFileNames(imageList);
+    public ArrayList<String> getImageNamesList(){
+        
+        ArrayList<String> names = extractFileNames(imageList);
+        ArrayList<String> returnList = new ArrayList<>();
+        
+        for(int i=0;i<names.size();i++){
+            String s = String.format("%d. %s", i+1, names.get(i));
+            returnList.add(s);
+        }
+        
+        return returnList;
     }
 }
