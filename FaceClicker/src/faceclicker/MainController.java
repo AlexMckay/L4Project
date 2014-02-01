@@ -44,7 +44,7 @@ public class MainController {
     private Label dirCount;
     @FXML
     private ComboBox<String> imageCombo;
-    
+
     private SalientPointCollection points;
     private boolean activated = false; //activated is to check an image has been loaded
     private final ArrayList<Circle> circleList = new ArrayList<>();
@@ -71,7 +71,7 @@ public class MainController {
     }
 
     @FXML
-    protected void handleNextImageButton(ActionEvent event) {
+    protected void handleNextImageButton(ActionEvent event) throws IOException {
         nextImage();
     }
 
@@ -110,12 +110,12 @@ public class MainController {
 
                 circleList.add(sp.getCircle());
                 pane1.getChildren().add(sp.getCircle());
-                
+
                 try {
-                        points.writePoints(filePath);
-                    } catch (FileNotFoundException | UnsupportedEncodingException ex) {
-                        Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    points.writePoints(filePath);
+                } catch (FileNotFoundException | UnsupportedEncodingException ex) {
+                    Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
                 if (points.hasNext()) {
                     points.iterate();
@@ -133,7 +133,7 @@ public class MainController {
     public void displayImage(String imageName) throws IOException {
 
         String fileExt = imageName.substring(imageName.lastIndexOf('.') + 1);
-        
+
         dirContents.refreshPointlist();
 
         if (dirContents.canReadExtension(fileExt)) {
@@ -143,8 +143,8 @@ public class MainController {
 
             File file = new File(imageName);
             filePath = file.getAbsolutePath();
-            String txtName = filePath + ".txt";	
-            
+            String txtName = filePath + ".txt";
+
             if (dirContents.getPointsList().contains(txtName)) {
                 loadPoints(txtName);
             } else {
@@ -211,9 +211,9 @@ public class MainController {
             temp = lineScanner.next(); //y
             temp = lineScanner.next(); //=
             y = lineScanner.nextInt();
-            
-            if(x==0 && y==0){
-                activated=true;
+
+            if (x == 0 && y == 0) {
+                activated = true;
                 nextclickmessage.setText(points.getCurrent().getName());
                 break;
             }
@@ -242,7 +242,7 @@ public class MainController {
             nextclickmessage.setText(points.getCurrent().getName());
         }
     }
-    
+
     public void nextImage() {
         if (dirContents.hasNext()) {
             try {
@@ -254,6 +254,15 @@ public class MainController {
             alert("Directory emptied");
         }
     }
-    
-    
+
+    public void prevImage() {
+        if (dirContents.getIterator() != 0) {
+            try {
+                displayImage(dirContents.getPrevImage());
+            } catch (IOException ex) {
+                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
 }

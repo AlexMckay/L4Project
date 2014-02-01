@@ -93,6 +93,11 @@ public class DirectoryContents {
     	return imageList.get(iterator);
     }
     
+        public String getPrevImage(){ //put in a check here
+    	iterator--;
+    	return imageList.get(iterator);
+    }
+    
     public void iterate(){
     	iterator++;
     }

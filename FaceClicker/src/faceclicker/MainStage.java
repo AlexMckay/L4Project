@@ -34,6 +34,7 @@ public class MainStage extends Application {
 
         final KeyCombination undoCombo = new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN);
         final KeyCombination nextCombo = new KeyCodeCombination(KeyCode.D);
+        final KeyCombination prevCombo = new KeyCodeCombination(KeyCode.A);
 
         primaryStage.setTitle("Face Clicker");
         primaryStage.setScene(new Scene(root, 662, 700));
@@ -53,6 +54,8 @@ public class MainStage extends Application {
                     controller.undo();
                 }else if (nextCombo.match(ke)){
                     controller.nextImage();
+                }else if (prevCombo.match(ke)){
+                    controller.prevImage();
                 }
             }
         });
