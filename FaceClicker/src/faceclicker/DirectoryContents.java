@@ -9,13 +9,20 @@ import javax.imageio.ImageIO;
 public class DirectoryContents {
 	
     private ArrayList<String> imageList, pointList;
+    private File path;
     private int iterator;
 
     public DirectoryContents(File dirPath){
+            path=dirPath;
             ArrayList<String> allFiles = listFiles(dirPath);
             imageList = parseImages(allFiles);
             pointList = parsePoints(allFiles);
             iterator=0;
+    }
+    
+    public DirectoryContents(File dirPath, int i){
+        super();
+        iterator=i;
     }
 	
     public ArrayList<String> listFiles(File directory) {
@@ -60,6 +67,11 @@ public class DirectoryContents {
     		fileNames.add(fileName);
     	}
     	return fileNames;
+    }
+    
+    public void refreshPointlist(){
+        ArrayList<String> allFiles = listFiles(path);
+            pointList = parsePoints(allFiles);
     }
     
     public boolean canReadExtension(String fileExt) {

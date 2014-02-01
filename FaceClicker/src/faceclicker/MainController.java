@@ -56,7 +56,6 @@ public class MainController {
     protected void handleLoadDirButton(ActionEvent event) throws InterruptedException, IOException {
 
         Stage primaryStage = (Stage) imageBox.getScene().getWindow();
-        points = new SalientPointCollection();
 
         DirectoryChooser chooser = new DirectoryChooser();
         chooser.setTitle("Choose Directory");
@@ -111,6 +110,12 @@ public class MainController {
 
                 circleList.add(sp.getCircle());
                 pane1.getChildren().add(sp.getCircle());
+                
+                try {
+                        points.writePoints(filePath);
+                    } catch (FileNotFoundException | UnsupportedEncodingException ex) {
+                        Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
 
                 if (points.hasNext()) {
                     points.iterate();
@@ -118,11 +123,6 @@ public class MainController {
                     nextclickmessage.setText(points.getCurrent().getName());
                 } else {
                     nextclickmessage.setText("Image finished");
-                    try {
-                        points.writePoints(filePath);
-                    } catch (FileNotFoundException | UnsupportedEncodingException ex) {
-                        Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
                     activated = false;
                 }
             }
@@ -133,6 +133,8 @@ public class MainController {
     public void displayImage(String imageName) throws IOException {
 
         String fileExt = imageName.substring(imageName.lastIndexOf('.') + 1);
+        
+        dirContents.refreshPointlist();
 
         if (dirContents.canReadExtension(fileExt)) {
 
@@ -142,6 +144,7 @@ public class MainController {
             File file = new File(imageName);
             filePath = file.getAbsolutePath();
             String txtName = filePath + ".txt";	
+            
             if (dirContents.getPointsList().contains(txtName)) {
                 loadPoints(txtName);
             } else {
@@ -208,6 +211,12 @@ public class MainController {
             temp = lineScanner.next(); //y
             temp = lineScanner.next(); //=
             y = lineScanner.nextInt();
+            
+            if(x==0 && y==0){
+                activated=true;
+                nextclickmessage.setText(points.getCurrent().getName());
+                break;
+            }
             sp.setX(x);
             sp.setY(y);
             circleList.add(sp.getCircle());
@@ -245,4 +254,6 @@ public class MainController {
             alert("Directory emptied");
         }
     }
+    
+    
 }
