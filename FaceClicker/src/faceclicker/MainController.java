@@ -143,10 +143,11 @@ public class MainController {
 
             File file = new File(imageName);
             filePath = file.getAbsolutePath();
-            String txtName = filePath + ".txt";
+            String fileName = file.getName();
+            String pointsPath = dirContents.getPointsPathString() +"\\" + fileName + ".txt";
 
-            if (dirContents.getPointsList().contains(txtName)) {
-                loadPoints(txtName);
+            if (dirContents.getPointsList().contains(pointsPath)) {
+                loadPoints(pointsPath);
             } else {
                 nextclickmessage.setText(points.getCurrent().getName());	//display first salient point to click
             }
