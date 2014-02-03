@@ -9,4 +9,5 @@ Keyboard Shortcuts
 ------------------
 
 Ctrl + Z : undo last placed point
+
 A and D: browse back and forth respectively through the pictures
