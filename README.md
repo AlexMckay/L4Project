@@ -8,6 +8,6 @@ The program will create a folder inside the folder your images are stored in cal
 Keyboard Shortcuts
 ------------------
 
-Ctrl + Z : undo last placed point
+Ctrl + Z: undo last placed point
 
 A and D: browse back and forth respectively through the pictures
