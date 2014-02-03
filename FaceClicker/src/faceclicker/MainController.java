@@ -48,7 +48,7 @@ public class MainController {
     private SalientPointCollection points;
     private boolean activated = false; //activated is to check an image has been loaded
     private final ArrayList<Circle> circleList = new ArrayList<>();
-    private String filePath;
+    private String filePath, fileName;
     private DirectoryContents dirContents;
     private double curWidth, curHeight;
 
@@ -112,7 +112,7 @@ public class MainController {
                 pane1.getChildren().add(sp.getCircle());
 
                 try {
-                    points.writePoints(filePath);
+                    points.writePoints(dirContents.getPointsFilePath(fileName));
                 } catch (FileNotFoundException | UnsupportedEncodingException ex) {
                     Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -143,8 +143,8 @@ public class MainController {
 
             File file = new File(imageName);
             filePath = file.getAbsolutePath();
-            String fileName = file.getName();
-            String pointsPath = dirContents.getPointsPathString() +"\\" + fileName + ".txt";
+            fileName = file.getName();
+            String pointsPath = dirContents.getPointsFilePath(fileName);
 
             if (dirContents.getPointsList().contains(pointsPath)) {
                 loadPoints(pointsPath);

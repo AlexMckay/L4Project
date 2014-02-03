@@ -142,4 +142,8 @@ public class DirectoryContents {
     public String getPointsPathString(){
         return pointsPathString;
     }
+    
+    public String getPointsFilePath(String fileName){
+        return pointsPathString +"\\" + fileName + ".txt";
+    }
 }

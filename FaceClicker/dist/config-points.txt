@@ -1,0 +1,21 @@
+left eyebrow outer
+left eyebrow inner
+right eyebrow inner
+right eyebrow outer
+left eye outer
+left eye center
+left eye inner
+right eye inner
+right eye center
+right eye outer
+left nostril
+right nostril
+left ear
+right ear
+mouth left
+mouth right
+mouth top
+mouth bottom
+chin left
+chin right
+chin center
