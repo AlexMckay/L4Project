@@ -213,9 +213,8 @@ public class MainController {
             temp = lineScanner.next(); //=
             y = lineScanner.nextInt();
 
-            if (x == 0 && y == 0) {
+            if ((x == 0 && y == 0)) {
                 activated = true;
-                nextclickmessage.setText(points.getCurrent().getName());
                 break;
             }
             sp.setX(x);
@@ -228,6 +227,9 @@ public class MainController {
             lineScanner.close();
         }
         fileScanner.close();
+        if (points.getCurrent() != null){
+            nextclickmessage.setText(points.getCurrent().getName());
+        }
     }
 
     public void undo() {

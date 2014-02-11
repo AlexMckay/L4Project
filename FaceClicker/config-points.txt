@@ -19,3 +19,4 @@ mouth bottom
 chin left
 chin right
 chin center
+forehead top
