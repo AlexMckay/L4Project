@@ -51,6 +51,7 @@ public class MainController {
     private String filePath, fileName;
     private DirectoryContents dirContents;
     private double curWidth, curHeight;
+    private Calculator calc;
 
     @FXML
     protected void handleLoadDirButton(ActionEvent event) throws InterruptedException, IOException {
@@ -63,10 +64,12 @@ public class MainController {
         chooser.setInitialDirectory(defaultDirectory);
         File dirPath = chooser.showDialog(primaryStage);
         dirContents = new DirectoryContents(dirPath);
+        calc = new Calculator(dirContents.getPointsPathString());
 
         imageCombo.setItems(FXCollections.observableArrayList(dirContents.getImageNamesList()));
 
         displayImage(dirContents.getImage(0));
+        findThings();
 
     }
 
@@ -266,6 +269,35 @@ public class MainController {
                 Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+    
+    public void findThings(){
+        double max = 0;
+        double min = 99999;
+        double temp;
+        String maxName="";
+        String minName="";
+        int i = 0;
+        while (dirContents.hasNext()){
+            System.out.println(i++);
+            try {
+                displayImage(dirContents.getNextImage());
+            } catch (IOException ex) {
+                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            temp = calc.performCalculations(points);
+            if(temp>max){
+                max=temp;
+                maxName = fileName;
+            }
+            if (temp<min){
+                min=temp;
+                minName = fileName;
+            }
+        }
+        System.out.printf("Max: %s \nMin: %s\n", maxName, minName);
+        System.out.println(max);
+        System.out.println(min);
     }
 
 }

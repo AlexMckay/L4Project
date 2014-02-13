@@ -35,6 +35,14 @@ public class SalientPointCollection {
             return null;
         }
     }
+    
+    public SalientPoint get(int i){
+        if (i < spArray.size()){
+            return spArray.get(i);
+        } else {
+            return null;
+        }
+    }
 
     //checks if the list has any more salient points after the current
     public boolean hasNext() {
