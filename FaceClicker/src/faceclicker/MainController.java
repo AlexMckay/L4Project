@@ -1,5 +1,6 @@
 package faceclicker;
 
+import analysis.Calculator;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -64,12 +65,11 @@ public class MainController {
         chooser.setInitialDirectory(defaultDirectory);
         File dirPath = chooser.showDialog(primaryStage);
         dirContents = new DirectoryContents(dirPath);
-        calc = new Calculator(dirContents.getPointsPathString());
+        System.out.println(dirPath);
 
         imageCombo.setItems(FXCollections.observableArrayList(dirContents.getImageNamesList()));
 
         displayImage(dirContents.getImage(0));
-        findThings();
 
     }
 
