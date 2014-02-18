@@ -270,34 +270,4 @@ public class MainController {
             }
         }
     }
-    
-    public void findThings(){
-        double max = 0;
-        double min = 99999;
-        double temp;
-        String maxName="";
-        String minName="";
-        int i = 0;
-        while (dirContents.hasNext()){
-            System.out.println(i++);
-            try {
-                displayImage(dirContents.getNextImage());
-            } catch (IOException ex) {
-                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            temp = calc.performCalculations(points);
-            if(temp>max){
-                max=temp;
-                maxName = fileName;
-            }
-            if (temp<min){
-                min=temp;
-                minName = fileName;
-            }
-        }
-        System.out.printf("Max: %s \nMin: %s\n", maxName, minName);
-        System.out.println(max);
-        System.out.println(min);
-    }
-
 }
