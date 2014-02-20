@@ -5,16 +5,22 @@ import faceclicker.SalientPoint;
 import faceclicker.SalientPointCollection;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class Executor {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
         Calculator calc;
-        String inputDir = "C:\\Users\\xen\\Pictures\\ProjectFaces";
-        DirectoryContents dirContents = new DirectoryContents(new File(inputDir));
-        String outputDir = inputDir + "\\Calculator_Output";
+        String inDirString = "C:\\Users\\xen\\Pictures\\ProjectFaces";
+        DirectoryContents dirContents = new DirectoryContents(new File(inDirString));
+        String outDirString = inDirString + "\\Calculator_Output";
+        File outDir = new File(outDirString);
+        if(!outDir.exists()){
+            outDir.mkdir();
+        }
+  
         ArrayList<String> pointsList = dirContents.getPointsList();
         ArrayList<String> namesList = new ArrayList<>();
         ArrayList<Double> widthToHeight = new ArrayList<>();
@@ -24,12 +30,15 @@ public class Executor {
         while (!pointsList.isEmpty()) {
             currentFileLoc = pointsList.remove(0);
             calc = new Calculator(currentFileLoc);
-            fileName = currentFileLoc.substring(currentFileLoc.lastIndexOf('\\') + 1, currentFileLoc.lastIndexOf('.'));
+            fileName = currentFileLoc.substring(currentFileLoc.lastIndexOf('\\') + 1);
             namesList.add(fileName);
             
             widthToHeight.add(calc.ratioWidthToHeight());
+            
+            String outputFile = outDirString + "\\" + fileName;
+            calc.writeData(outputFile);
        
-            System.out.println(i);
+            System.out.println(i++);
         }
         
         double maxWidthToHeight = Collections.max(widthToHeight);

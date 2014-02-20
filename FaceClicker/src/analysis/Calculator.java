@@ -4,6 +4,8 @@ import faceclicker.SalientPoint;
 import faceclicker.SalientPointCollection;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 
 /*
@@ -29,10 +31,10 @@ import java.util.Scanner;
  19 chin right
  20 chin center
  21 forehead top    
-*/
+ */
 public class Calculator {
 
-                            //Gunes #
+    //Gunes #
     double topToChin;       //1
     double eyesToChin;      //2
     double topToNostrils;    //3
@@ -73,7 +75,7 @@ public class Calculator {
         SalientPoint eyeMid = new SalientPoint("eyeMid",
                 ((eyeL.getX() + eyeR.getX()) / 2),
                 ((eyeL.getY() + eyeR.getY()) / 2));
-        
+
         SalientPoint browMid = new SalientPoint("eyebrowMid",
                 ((eyebrowL.getX() + eyebrowR.getX()) / 2),
                 ((eyebrowL.getY() + eyebrowR.getY()) / 2));
@@ -81,10 +83,10 @@ public class Calculator {
         SalientPoint noseMid = new SalientPoint("noseMid",
                 ((noseL.getX() + noseR.getX()) / 2),
                 ((noseL.getY() + noseR.getY()) / 2));
-        
+
         SalientPoint lipsMid = new SalientPoint("lipsMid",
                 ((mouthT.getX() + mouthT.getX()) / 2),
-                ((mouthB.getY() + mouthB.getY()) / 2));        
+                ((mouthB.getY() + mouthB.getY()) / 2));
 
         topToChin = lengthBetween(chin, fore);
         eyesToChin = lengthBetween(eyeMid, chin);
@@ -159,7 +161,7 @@ public class Calculator {
     public double ratioGoldenTwo() {
         return ratio(topToNostrils, nostrilsToChin);
     }
-    
+
     public double ratioGoldenThree() {
         return ratio(eyesToLips, lipsToChin);
     }
@@ -167,16 +169,57 @@ public class Calculator {
     public double ratioGoldenFour() {
         return ratio(nostrilsToChin, eyesToNostrils);
     }
-    
-        public double ratioGoldenFive() {
+
+    public double ratioGoldenFive() {
         return ratio(eyesToNostrils, nostrilsToLips);
     }
 
     public double ratioGoldenSix() {
         return ratio(lipsToChin, nostrilsToLips);
     }
+    
+    public double ratioGoldenMean() {
+        return (ratioGoldenOne()+ratioGoldenTwo()+ratioGoldenThree()+ratioGoldenFour()+ratioGoldenFive()+ratioGoldenSix())/6;
+    }
+    
+    public double ratioThirdsOne() {
+        return ratio(topToEyebrows, topToChin);
+    }
+    
+    public double ratioThirdsTwo() {
+        return ratio(eyebrowsToNose, topToChin);
+    }
+    
+    public double ratioThirdsThree() {
+        return ratio(noseToChin, topToChin);
+    }
+    
+    public double ratioThirdsFour() {
+        return ratio(noseToLips, lipsToChin);
+    }
 
     public double ratioWidthToHeight() {
         return ratio(earToEar, topToChin);
+    }
+    
+    
+
+    public void writeData(String filename) throws FileNotFoundException, UnsupportedEncodingException {
+        PrintWriter writer = new PrintWriter(filename, "UTF-8");
+        writer.println("Golden Proportions");
+        writer.println(String.format("2:4 = %f\n", ratioGoldenOne()));
+        writer.println(String.format("3:5 = %f\n", ratioGoldenTwo()));
+        writer.println(String.format("6:7 = %f\n", ratioGoldenThree()));
+        writer.println(String.format("5:8 = %f\n", ratioGoldenFour()));
+        writer.println(String.format("8:9 = %f\n", ratioGoldenFive()));
+        writer.println(String.format("7:9 = %f\n", ratioGoldenSix()));
+        writer.println(String.format("mean = %f\n\n", ratioGoldenMean()));
+        writer.println("");
+        writer.println("Facial Thirds");
+        writer.println(String.format("10:1 = %f\n", ratioThirdsOne()));
+        writer.println(String.format("11:1 = %f\n", ratioThirdsTwo()));
+        writer.println(String.format("12:1 = %f\n", ratioThirdsThree()));
+        writer.println(String.format("13:14 = %f", ratioThirdsFour()));
+        writer.close();
     }
 }
