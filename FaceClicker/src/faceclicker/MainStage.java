@@ -59,7 +59,7 @@ public class MainStage extends Application {
         primaryStage.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent me) {
-                SalientPoint sp = controller.grabCoords(me);
+                controller.grabCoords(me);
             }
         });
 

@@ -11,7 +11,7 @@
   </resources>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="FaceClicker.jar" size="37360" download="eager" />
+    <jar href="FaceClicker.jar" size="37177" download="eager" />
     <jar href="lib/jai_core.jar" size="1900631" download="eager" />
     <jar href="lib/jai_imageio.jar" size="1140632" download="eager" />
   </resources>

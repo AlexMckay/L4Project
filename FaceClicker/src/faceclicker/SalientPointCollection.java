@@ -94,9 +94,8 @@ public class SalientPointCollection {
      * re-entered.
      */
     public void undo() {
-        if (currentPoint > 0) {
+        if (currentPoint > 0)
             currentPoint--;
-        }
     }
 
     /**
