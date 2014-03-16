@@ -33,6 +33,10 @@ import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 
+/**
+ *
+ * @author xen
+ */
 public class MainController {
 
     @FXML
@@ -54,6 +58,12 @@ public class MainController {
     private double curWidth, curHeight;
     private Calculator calc;
 
+    /**
+     *
+     * @param event
+     * @throws InterruptedException
+     * @throws IOException
+     */
     @FXML
     protected void handleLoadDirButton(ActionEvent event) throws InterruptedException, IOException {
 
@@ -73,11 +83,21 @@ public class MainController {
 
     }
 
+    /**
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     protected void handleNextImageButton(ActionEvent event) throws IOException {
         nextImage();
     }
 
+    /**
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     protected void handleComboChange(ActionEvent event) throws IOException {
         int i = imageCombo.getSelectionModel().getSelectedIndex();
@@ -86,11 +106,19 @@ public class MainController {
         }
     }
 
+    /**
+     *
+     * @param event
+     */
     @FXML
     protected void handleUndoButton(ActionEvent event) {
         undo();
     }
 
+    /**
+     *
+     * @param event
+     */
     @FXML
     protected void handleResetButton(ActionEvent event) {
         points = new SalientPointCollection();
@@ -100,7 +128,13 @@ public class MainController {
     }
 
     //function that handles mouse clicks: stores x+y data in current SP and moves on to next one
-    @FXML
+
+    /**
+     *
+     * @param me
+     * @return
+     */
+        @FXML
     protected SalientPoint grabCoords(MouseEvent me) {
         double mouseX = me.getX();
         double mouseY = me.getY();
@@ -133,13 +167,16 @@ public class MainController {
         return null;
     }
 
+    /**
+     *
+     * @param imageName
+     * @throws IOException
+     */
     public void displayImage(String imageName) throws IOException {
-
-        String fileExt = imageName.substring(imageName.lastIndexOf('.') + 1);
 
         dirContents.refreshPointlist();
 
-        if (dirContents.canReadExtension(fileExt)) {
+        if (dirContents.isImage(imageName)) {
 
             points = new SalientPointCollection();
             wipeCircles();
@@ -175,6 +212,9 @@ public class MainController {
         imageCombo.getSelectionModel().select(dirContents.getIterator());
     }
 
+    /**
+     *
+     */
     public void wipeCircles() {
         for (Circle cc : circleList) {
             pane1.getChildren().remove(cc);
@@ -182,6 +222,10 @@ public class MainController {
         circleList.removeAll(circleList);
     }
 
+    /**
+     *
+     * @param s
+     */
     public void alert(String s) {
         nextclickmessage.setText(s);
         Stage dialogStage = new Stage();
@@ -192,10 +236,20 @@ public class MainController {
         dialogStage.show();
     }
 
+    /**
+     *
+     * @param number
+     * @param total
+     */
     public void setDirCount(int number, int total) {
         dirCount.setText(String.format("%d/%d", number + 1, total));
     }
 
+    /**
+     *
+     * @param pointsFile
+     * @throws FileNotFoundException
+     */
     public void loadPoints(String pointsFile) throws FileNotFoundException {
         File file = new File(pointsFile);
         String temp;
@@ -235,6 +289,9 @@ public class MainController {
         }
     }
 
+    /**
+     *
+     */
     public void undo() {
         if (activated) {
             points.undo();
@@ -249,6 +306,9 @@ public class MainController {
         }
     }
 
+    /**
+     *
+     */
     public void nextImage() {
         if (dirContents.hasNext()) {
             try {
@@ -261,6 +321,9 @@ public class MainController {
         }
     }
 
+    /**
+     *
+     */
     public void prevImage() {
         if (dirContents.getIterator() != 0) {
             try {
