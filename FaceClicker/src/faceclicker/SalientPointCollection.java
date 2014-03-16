@@ -10,25 +10,48 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
+/**
+ * Contains a collection of SalientPoint objects. This collection corresponds to
+ * the coordinate data for one image. The collection is iterated through as a 
+ * user inputs points for an image. 
+ *
+ * @author Alex McKay
+ */
 public class SalientPointCollection {
-
-    ArrayList<String> spNames;	//values for the various salient points are set here from the config file
+    
+    /* Contains the salient points */
     ArrayList<SalientPoint> spArray;
-    int currentPoint; //used to iterate through the list by storing the index value of the current salient point
+    
+    /* Contains the index value of the current salient point, to iterate through */
+    int currentPoint; 
 
+    
+    /**
+     * Constructor Method. Loads required point names then creates objects for 
+     * every required salient point.
+     *
+     */
     public SalientPointCollection() {
         currentPoint = 0;
-        loadPoints();
         spArray = new ArrayList<>();
+        
+        //load the required salient point names
+        ArrayList<String> spNames = loadPointNames();
+        
 
         //loops through the array of names and creates a salient point for each one
-        for (String name : spNames) {
+        for (String name : spNames)
             spArray.add(new SalientPoint(name));
-        }
+        
     }
 
-    //returns the current salient point
-    public SalientPoint getCurrent() {
+    /**
+     * Retrieve the current salient point. This is the point which the user has
+     * to click next.
+     *
+     * @return
+     */
+        public SalientPoint getCurrent() {
         if (currentPoint < spArray.size()) {
             return spArray.get(currentPoint);
         } else {
@@ -36,6 +59,12 @@ public class SalientPointCollection {
         }
     }
     
+    /**
+     * Retrieve a salient point from the specified position in the list.
+     *
+     * @param i The position in the list to get the point from.
+     * @return The SalientPoint object stored at that position in the list.
+     */
     public SalientPoint get(int i){
         if (i < spArray.size()){
             return spArray.get(i);
@@ -44,41 +73,66 @@ public class SalientPointCollection {
         }
     }
 
-    //checks if the list has any more salient points after the current
-    public boolean hasNext() {
+    /**
+     * Check if the collection has any more salient points yet to be set.
+     *
+     * @return True if there are still more salient points in the collection. 
+     */
+        public boolean hasNext() {
         return currentPoint != (spArray.size() - 1);
     }
 
-    //moves to the next salient point in the list
-    public void iterate() {
+    /**
+     * Move to the next salient point in the collection.
+     */
+        public void iterate() {
         currentPoint++;
     }
 
+    /**
+     * Roll back to the previously clicked salient point, to allow it to be 
+     * re-entered.
+     */
     public void undo() {
         if (currentPoint > 0) {
             currentPoint--;
         }
     }
 
-    //outputs the list of x and y values for all the salient points to std output
+    /**
+     * Print x/y values for every point to standard output.
+     *
+     */
     public void printPoints() {
         for (SalientPoint sp : spArray) {
             sp.printValues();
         }
     }
-
-    //writes the list of x and y values for all the salient points to a file
+        
+    /**
+     * Write x/y values for every point to a specified file.
+     *
+     * @param filename The file to write to. 
+     * @throws FileNotFoundException
+     * @throws UnsupportedEncodingException
+     */
     public void writePoints(String filename) throws FileNotFoundException, UnsupportedEncodingException {
         PrintWriter writer = new PrintWriter(filename, "UTF-8");
-        for (SalientPoint sp : spArray) {
+        
+        for (SalientPoint sp : spArray) 
             writer.println(sp.toString());
-        }
+        
         writer.close();
     }
 
-    //load salient points from config file
-    public void loadPoints() {
-        spNames = new ArrayList<>();
+    /**
+     * Load names of the required points from config-points.txt. One line of the
+     * file is assumed to correspond to the name of one point. 
+     *
+     * @return A list of point names. 
+     */
+    public ArrayList<String> loadPointNames() {
+        ArrayList<String> names = new ArrayList<>();
 
         try {
             FileInputStream fstream = new FileInputStream("config-points.txt");
@@ -86,14 +140,17 @@ public class SalientPointCollection {
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String strLine;
 
-            while ((strLine = br.readLine()) != null) {
-                spNames.add(strLine);
-            }
+            //read in new lines, adding each to the list until no more exist
+            while ((strLine = br.readLine()) != null)
+                names.add(strLine);
+            
             in.close();
 
         } catch (IOException e) {
             System.err.println("Error: " + e.getMessage());
         }
+        
+        return names;
     }
 
 }

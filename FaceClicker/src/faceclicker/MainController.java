@@ -35,10 +35,11 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author xen
+ * @author Alex McKay
  */
 public class MainController {
 
+    /* The following objects are GUI components specified within View.FXML*/
     @FXML
     private Text nextclickmessage;
     @FXML
@@ -128,13 +129,12 @@ public class MainController {
     }
 
     //function that handles mouse clicks: stores x+y data in current SP and moves on to next one
-
     /**
      *
      * @param me
      * @return
      */
-        @FXML
+    @FXML
     protected SalientPoint grabCoords(MouseEvent me) {
         double mouseX = me.getX();
         double mouseY = me.getY();
@@ -284,7 +284,7 @@ public class MainController {
             lineScanner.close();
         }
         fileScanner.close();
-        if (points.getCurrent() != null){
+        if (points.getCurrent() != null) {
             nextclickmessage.setText(points.getCurrent().getName());
         }
     }
