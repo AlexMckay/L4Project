@@ -11,7 +11,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 /**
- * Contains a collection of SalientPoint objects. This collection corresponds to
+ * Contains a collection of SalientPoint objects matching the desired points 
+ * specified in 'config-points.txt'. This collection corresponds to
  * the coordinate data for one image. The collection is iterated through as a 
  * user inputs points for an image. 
  *

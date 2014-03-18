@@ -366,42 +366,40 @@ public class MainController {
      *
      */
     public void undo() {
+        //if not activated, current point will still be the final point, so will not need to step back a point
         if (activated)
             points.undo();
         else 
             activated = true;
         
+        //remove the last placed circle
         if (!circleList.isEmpty())
             pane1.getChildren().remove(circleList.remove(circleList.size() - 1));
         
+        //display the point to click again
         nextclickmessage.setText(points.getCurrent().getName());
     }
 
     /**
+     * Display the next image in the directory.
      *
+     * @throws java.io.IOException
      */
-    public void nextImage() {
+    public void nextImage() throws IOException {
         if (dirContents.hasNext()) {
-            try {
-                displayImage(dirContents.getNextImage());
-            } catch (IOException ex) {
-                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        displayImage(dirContents.getNextImage());
         } else {
-            alert("Directory emptied");
+            alert("Directory finished");
         }
     }
 
     /**
+     * Display the previous image in the directory.
      *
+     * @throws java.io.IOException
      */
-    public void prevImage() {
-        if (dirContents.getIterator() != 0) {
-            try {
-                displayImage(dirContents.getPrevImage());
-            } catch (IOException ex) {
-                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+    public void prevImage() throws IOException {
+        if (dirContents.getIterator() != 0)
+            displayImage(dirContents.getPrevImage());
     }
 }

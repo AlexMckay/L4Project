@@ -1,6 +1,9 @@
 package faceclicker;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -70,9 +73,17 @@ public class MainStage extends Application {
                 if (undoCombo.match(ke)) {
                     controller.undo();
                 }else if (nextCombo.match(ke)){
-                    controller.nextImage();
+                    try {
+                        controller.nextImage();
+                    } catch (IOException ex) {
+                        Logger.getLogger(MainStage.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }else if (prevCombo.match(ke)){
-                    controller.prevImage();
+                    try {
+                        controller.prevImage();
+                    } catch (IOException ex) {
+                        Logger.getLogger(MainStage.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         });

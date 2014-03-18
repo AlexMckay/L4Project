@@ -7,9 +7,9 @@ import java.util.Iterator;
 import javax.imageio.ImageIO;
 
 /**
- * Stores data relating to files being used by the program. It
- * has lists containing the images to be annotated, and coordinate data for
- * previously annotated images. It also contains an iterator to store the user's
+ * Stores data relating to files being used by the program.
+ * Has lists containing the images to be annotated, and coordinate data for
+ * previously annotated images. Also contains an iterator to store the user's
  * current position in the directory (ie which picture they are currently
  * annotating).
  *
@@ -53,7 +53,8 @@ public class DirectoryContents {
     }
 
     /**
-     * Constructor method, allowing specification of current location.
+     * Constructor method, allowing specification of current location within 
+     * directory.
      *
      * @param dirPath a File object set to the path of the directory of
      * images you wish to annotate.
