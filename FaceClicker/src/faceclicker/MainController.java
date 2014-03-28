@@ -1,6 +1,5 @@
 package faceclicker;
 
-import analysis.Calculator;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -85,6 +84,7 @@ public class MainController {
 
         Stage primaryStage = (Stage) imageBox.getScene().getWindow();
 
+        //display dialogue window for user to choose directory
         DirectoryChooser chooser = new DirectoryChooser();
         chooser.setTitle("Choose Directory");
         File defaultDirectory = new File("c:/");
@@ -96,6 +96,13 @@ public class MainController {
 
         //set the options within the combobox to correspond to the image names
         imageCombo.setItems(FXCollections.observableArrayList(dirContents.getImageNamesList()));
+        
+        //check that config-points.txt file exists
+        File configPoints = new File("config-points.txt");
+        if (!configPoints.isFile())
+            alert("Error: config-points.txt file not found! \n"
+                    + "Please place this file in the same directory\n "
+                    + "as FaceClicker.jar before continuing");
 
         //display the first image from the directory
         displayImage(dirContents.getImage(0));

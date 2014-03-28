@@ -85,8 +85,8 @@ public class Calculator {
                 ((noseL.getY() + noseR.getY()) / 2));
 
         SalientPoint lipsMid = new SalientPoint("lipsMid",
-                ((mouthT.getX() + mouthT.getX()) / 2),
-                ((mouthB.getY() + mouthB.getY()) / 2));
+                ((mouthT.getX() + mouthB.getX()) / 2),
+                ((mouthB.getY() + mouthT.getY()) / 2));
 
         topToChin = lengthBetween(chin, fore);
         eyesToChin = lengthBetween(eyeMid, chin);
@@ -95,7 +95,7 @@ public class Calculator {
         nostrilsToChin = lengthBetween(noseMid, chin);
         eyesToLips = lengthBetween(eyeMid, lipsMid);
         eyesToNostrils = lengthBetween(eyeMid, noseMid);
-        nostrilsToLips = lengthBetween(noseMid, mouthT);
+        nostrilsToLips = lengthBetween(noseMid, lipsMid);
         topToEyebrows = lengthBetween(fore, browMid);
         eyebrowsToNose = lengthBetween(browMid, noseMid);
         noseToChin = lengthBetween(noseMid, chin);

@@ -28,8 +28,8 @@ public class SalientPointCollection {
 
     
     /**
-     * Constructor Method. Loads required point names then creates objects for 
-     * every required salient point.
+     * Constructor Method. Loads required point names from config-points.txt
+     * then creates objects for every required salient point.
      *
      */
     public SalientPointCollection() {
@@ -148,6 +148,7 @@ public class SalientPointCollection {
 
         } catch (IOException e) {
             System.err.println("Error: " + e.getMessage());
+            return null;
         }
         
         return names;

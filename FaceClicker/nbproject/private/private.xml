@@ -5,9 +5,12 @@
         <group>
             <file>file:/C:/Users/xen/Documents/GitHub/L4Project/FaceClicker/src/faceclicker/MainController.java</file>
             <file>file:/C:/Users/xen/Documents/GitHub/L4Project/FaceClicker/src/faceclicker/SalientPointCollection.java</file>
+            <file>file:/C:/Users/xen/Documents/GitHub/L4Project/FaceClicker/src/faceclicker/View.fxml</file>
             <file>file:/C:/Users/xen/Documents/GitHub/L4Project/FaceClicker/src/faceclicker/SalientPoint.java</file>
             <file>file:/C:/Users/xen/Documents/GitHub/L4Project/FaceClicker/src/faceclicker/MainStage.java</file>
+            <file>file:/C:/Users/xen/Documents/GitHub/L4Project/FaceClicker/src/analysis/Calculator.java</file>
             <file>file:/C:/Users/xen/Documents/GitHub/L4Project/FaceClicker/src/faceclicker/DirectoryContents.java</file>
+            <file>file:/C:/Users/xen/Documents/GitHub/L4Project/FaceClicker/src/analysis/Executor.java</file>
         </group>
     </open-files>
 </project-private>
