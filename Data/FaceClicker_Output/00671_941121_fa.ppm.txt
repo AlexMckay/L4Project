@@ -1,0 +1,22 @@
+left eyebrow outer: x = 129 y = 259
+left eyebrow inner: x = 0 y = 0
+right eyebrow inner: x = 0 y = 0
+right eyebrow outer: x = 0 y = 0
+left eye outer: x = 0 y = 0
+left eye center: x = 0 y = 0
+left eye inner: x = 0 y = 0
+right eye inner: x = 0 y = 0
+right eye center: x = 0 y = 0
+right eye outer: x = 0 y = 0
+left nostril: x = 0 y = 0
+right nostril: x = 0 y = 0
+left ear: x = 0 y = 0
+right ear: x = 0 y = 0
+mouth left: x = 0 y = 0
+mouth right: x = 0 y = 0
+mouth top: x = 0 y = 0
+mouth bottom: x = 0 y = 0
+chin left: x = 0 y = 0
+chin right: x = 0 y = 0
+chin center: x = 0 y = 0
+forehead top: x = 0 y = 0

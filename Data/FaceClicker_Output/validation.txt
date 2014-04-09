@@ -1,0 +1,22 @@
+left eyebrow outer: x = 100 y = 100
+left eyebrow inner: x = 200 y = 100
+right eyebrow inner: x = 300 y = 100
+right eyebrow outer: x = 400 y = 100
+left eye outer: x = 100 y = 200
+left eye center: x = 150 y = 200
+left eye inner: x = 200 y = 200
+right eye inner: x = 300 y = 200
+right eye center: x = 350 y = 200
+right eye outer: x = 400 y = 200
+left nostril: x = 200 y = 300
+right nostril: x = 300 y = 300
+left ear: x = 0 y = 300
+right ear: x = 500 y = 300
+mouth left: x = 200 y = 400
+mouth right: x = 300 y = 400
+mouth top: x = 250 y = 350
+mouth bottom: x = 250 y = 450
+chin left: x = 50 y = 450
+chin right: x = 450 y = 450
+chin center: x = 250 y = 600
+forehead top: x = 250 y = 0

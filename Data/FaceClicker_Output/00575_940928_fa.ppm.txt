@@ -1,0 +1,22 @@
+left eyebrow outer: x = 119 y = 324
+left eyebrow inner: x = 235 y = 304
+right eyebrow inner: x = 292 y = 299
+right eyebrow outer: x = 389 y = 318
+left eye outer: x = 160 y = 354
+left eye center: x = 189 y = 351
+left eye inner: x = 223 y = 353
+right eye inner: x = 295 y = 356
+right eye center: x = 328 y = 354
+right eye outer: x = 357 y = 359
+left nostril: x = 240 y = 421
+right nostril: x = 292 y = 423
+left ear: x = 84 y = 429
+right ear: x = 409 y = 437
+mouth left: x = 214 y = 490
+mouth right: x = 311 y = 489
+mouth top: x = 266 y = 468
+mouth bottom: x = 264 y = 505
+chin left: x = 104 y = 513
+chin right: x = 381 y = 531
+chin center: x = 262 y = 604
+forehead top: x = 270 y = 175
